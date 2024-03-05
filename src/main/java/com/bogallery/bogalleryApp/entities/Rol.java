@@ -1,0 +1,36 @@
+package com.bogallery.bogalleryApp.entities;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity
+@Table(name = "roles")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Rol {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column( name = "Id_rol", length = 11, nullable = false)
+    private long id;
+
+    @Column( name = "Nombre_rol", length = 30, nullable = false)
+    private String nombreR;
+
+    @Column( name = "Descripcion_rol", length = 150, nullable = false)
+    private String descripcion_rol;
+
+    @Column(name = "Fecha_registroR", columnDefinition = "DATETIME", nullable = false)
+    private LocalDateTime fecha_registroR;
+
+    @OneToMany(mappedBy = "roles", cascade = CascadeType.ALL)
+    private List<Usuariorol> usuariorol;
+
+
+}

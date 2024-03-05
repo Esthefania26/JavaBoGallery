@@ -52,5 +52,12 @@ public class Usuario {
     //un usuario puede generar muchas inscripciones
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Inscripcion> inscripciones;
+
+//Un usuario puede tener muchos usuariorol
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Usuariorol> usuarioroles;
+//un usuario puede registrar muchos lugares
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade =  CascadeType.ALL)
+    private List<Lugar> lugar;
 }
 
