@@ -53,9 +53,18 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Inscripcion> inscripciones;
 
-//Un usuario puede tener muchos usuariorol
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<Usuariorol> usuarioroles;
+//Un usuario puede tener muchos rol
+
+    @ManyToMany
+    @JoinTable(
+            name = "usuariorol",
+            joinColumns = @JoinColumn(name = "Id_usu",referencedColumnName  = "Id_usu"),
+            inverseJoinColumns = @JoinColumn(name = "Id_rol", referencedColumnName = "Id_rol")
+    )
+
+    private List<Rol> rol;
+
+
 //un usuario puede registrar muchos lugares
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade =  CascadeType.ALL)
     private List<Lugar> lugar;

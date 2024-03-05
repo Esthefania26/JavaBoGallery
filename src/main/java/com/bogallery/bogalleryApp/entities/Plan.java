@@ -42,7 +42,7 @@ public class Plan {
 
 //Un plan puede generar muchas incripciones
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
-    private List<Inscripcion> inscripciones;
+    private List<Inscripcion> inscripcion;
 
 
  //Muchos planes pueden pertenecer a una categoria
@@ -52,7 +52,7 @@ public class Plan {
 
 //Un plan puede tener muchas promociones
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
-    private List<Promocion> promociones;
+    private List<Promocion> promocion;
 //Un plan puede tener muchos guias turistas
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
     private List<GuiaTurista> guiasTuristas;

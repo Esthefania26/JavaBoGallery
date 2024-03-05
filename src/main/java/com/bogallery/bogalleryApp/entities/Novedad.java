@@ -25,5 +25,5 @@ public class Novedad {
 
 //Una novedad puede pertenecer a una inscripcion
     @OneToMany(mappedBy = "novedad", cascade = CascadeType.ALL)
-    private List<Inscripcion> inscripciones;
+    private List<Inscripcion> inscripcion;
 }

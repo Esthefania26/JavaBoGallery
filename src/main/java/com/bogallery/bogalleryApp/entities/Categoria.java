@@ -23,5 +23,5 @@ public class Categoria {
 
 //una categoria puede tener muchos planes
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-    private List<Plan> planes;
+    private List<Plan> plan;
 }

@@ -29,8 +29,11 @@ public class Rol {
     @Column(name = "Fecha_registroR", columnDefinition = "DATETIME", nullable = false)
     private LocalDateTime fecha_registroR;
 
-    @OneToMany(mappedBy = "roles", cascade = CascadeType.ALL)
-    private List<Usuariorol> usuariorol;
+    @Column(name = "Estado", length = 1, nullable = false)
+    private char estado;
+
+ @ManyToMany(mappedBy = "rol")
+    private List<Usuario> usuario;
 
 
 }
