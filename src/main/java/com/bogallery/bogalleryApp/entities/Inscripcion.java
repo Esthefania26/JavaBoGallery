@@ -39,7 +39,7 @@ public class Inscripcion {
     @JoinColumn(name = "Id_planes")
     private Plan plan;
 //una inscripcion puede generar muchas ventas
-    @OneToMany(mappedBy = "inscripciones", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "inscripcion", cascade = CascadeType.ALL)
     private List<Venta> venta;
 
 

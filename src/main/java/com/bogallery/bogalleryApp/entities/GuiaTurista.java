@@ -30,4 +30,10 @@ public class GuiaTurista {
     @ManyToOne
     @JoinColumn(name = "id_perfilGuia")
     private PerfilGuia perfilGuia;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_empresa", nullable = false)
+    private Empresa empresa;
+
 }

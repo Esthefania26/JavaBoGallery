@@ -34,5 +34,9 @@ public class Pago {
     private byte[] archivoComprobante;
 
 
+//muchos pagos pueden ser generados por una venta
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Id_venta", nullable = false)
+    private Venta venta;
 
 }

@@ -19,7 +19,7 @@ public class Novedad {
     private long Id;
 
     @Column(name = "DescripcionN", columnDefinition = "TEXT", nullable = false)
-    private String descripcionn;
+    private String descripcionN;
     @Column(name = "EstadoN", length = 1, nullable = false)
     private String estadoN;
 

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "empresas")
@@ -50,5 +51,16 @@ public class Empresa {
     private String correoEm;
 
 
+//Muchas empresas pueden estar asociadas a un ro,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_rol", nullable = false)
+    private Rol rol;
 
+
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    private List<GuiaTurista> guiaTurista;
+
+//Una empresa puede registrar muchos planes
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    private List<Plan> plan;
 }

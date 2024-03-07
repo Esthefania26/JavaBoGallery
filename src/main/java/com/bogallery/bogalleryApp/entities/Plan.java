@@ -55,5 +55,9 @@ public class Plan {
     private List<Promocion> promocion;
 //Un plan puede tener muchos guias turistas
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
-    private List<GuiaTurista> guiasTuristas;
+    private List<GuiaTurista> guiaTurista;
+//muchos planes pueden esta registrados por una empresa
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nit_empresa", nullable = false)
+    private Empresa empresa;
 }

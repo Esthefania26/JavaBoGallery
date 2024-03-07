@@ -57,5 +57,5 @@ public class PerfilGuia {
 
     }
     @OneToMany(mappedBy = "perfilGuia", cascade = CascadeType.ALL)
-    private List<GuiaTurista> guiasTuristas;
+    private List<GuiaTurista> guiaTurista;
 }

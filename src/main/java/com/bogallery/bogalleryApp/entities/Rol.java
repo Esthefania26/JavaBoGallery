@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,8 +31,12 @@ public class Rol {
     @Column(name = "Estado", length = 1, nullable = false)
     private char estado;
 
+    //Muchos roles pueden estar asociados a un usuario
  @ManyToMany(mappedBy = "rol")
     private List<Usuario> usuario;
 
+//Un rol puede estar asociado a muchas empresas
+    @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
+    private List<Empresa> empresa;
 
 }

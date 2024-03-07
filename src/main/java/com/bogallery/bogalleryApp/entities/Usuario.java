@@ -53,7 +53,7 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Inscripcion> inscripciones;
 
-//Un usuario puede tener muchos rol
+//Un usuario puede tener muchos roles
 
     @ManyToMany
     @JoinTable(

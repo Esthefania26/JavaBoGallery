@@ -33,6 +33,10 @@ public class Venta {
 //Muchas ventas estan asociados a una inscripcion
     @ManyToOne
     @JoinColumn(name = "Id_inscripcion")
-    private Inscripcion inscripciones;
+    private Inscripcion inscripcion;
 
+
+    //Una venta puede generar muchos pagos
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+    private List<Pago> pago;
 }

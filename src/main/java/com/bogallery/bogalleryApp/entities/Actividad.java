@@ -48,4 +48,8 @@ public class Actividad {
     @Column( name = "URL_ACT",  nullable = false)
     private String urlACT;
 
+    //muchas actividades pueden estar en un lugar
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_lugar", nullable = false)
+    private Lugar lugar;
 }
