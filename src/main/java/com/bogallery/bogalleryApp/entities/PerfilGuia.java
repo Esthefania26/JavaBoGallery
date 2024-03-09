@@ -31,13 +31,14 @@ public class PerfilGuia {
     @Column (name = "CorreoG", length = 40, nullable = false)
     private String correoG;
 
-    @Column(name = "Certificado")
+    @Column(name = "Certificado", nullable = false)
+    @Lob
     private byte[] certificado;
 
     @Column(name = "Formacion", columnDefinition = "TEXT", nullable = false)
     private String formacion;
 
-    @Column(name = "Lengua_sena")
+    @Column(name = "Lengua_sena", nullable = false)
     private Boolean lenguaSena;
 
     @Column (name = "Idioma_materno", length = 40, nullable = false)

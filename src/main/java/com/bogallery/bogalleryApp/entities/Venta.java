@@ -32,7 +32,7 @@ public class Venta {
 
 //Muchas ventas estan asociados a una inscripcion
     @ManyToOne
-    @JoinColumn(name = "Id_inscripcion")
+    @JoinColumn(name = "Id_inscripcion", nullable = false)
     private Inscripcion inscripciones;
 
 }

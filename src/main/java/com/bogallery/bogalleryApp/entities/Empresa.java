@@ -26,10 +26,10 @@ public class Empresa {
     private String razon;
 
     @Column(name = "Rut", length = 15, nullable = false)
-    private long rut;
+    private int rut;
 
     @Column(name = "Telefono_em", length = 12, nullable = false)
-    private long telefono_em;
+    private int telefono_em;
 
     @Column( name = "Localidad_em", length = 40, nullable = false)
     private String localidadEm;
