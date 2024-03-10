@@ -21,7 +21,7 @@ public class RolImp implements RolService {
 
     public Rol findById(int id)
     {
-        return this.rolRepository.findBy(id);
+        return this.rolRepository.findById(id);
     }
 
     public void create(Rol rol)
