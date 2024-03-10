@@ -39,7 +39,7 @@ public class LugarImp implements LugarService {
 
     public void delete(Lugar lugar)
     {
-        this.lugarRepository.save(lugar);
+        this.lugarRepository.delete(lugar);
     }
 
 }

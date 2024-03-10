@@ -41,7 +41,7 @@ public class UsuarioImp implements UsuarioService {
 
     public  void delete(Usuario usuario)
     {
-        this.usuarioRepository.save(usuario);
+        this.usuarioRepository.delete(usuario);
     }
 
 

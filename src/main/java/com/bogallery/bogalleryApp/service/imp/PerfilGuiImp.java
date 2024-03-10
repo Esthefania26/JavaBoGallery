@@ -35,6 +35,6 @@ public class PerfilGuiImp implements PerfilGuiService {
     @Override
     public void delete(PerfilGuia perfilGuia)
     {
-        this.perlfilGuiRepository.save(perfilGuia);
+        this.perlfilGuiRepository.delete(perfilGuia);
     }
 }

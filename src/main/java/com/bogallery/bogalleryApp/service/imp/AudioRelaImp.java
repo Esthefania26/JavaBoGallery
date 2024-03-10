@@ -37,6 +37,6 @@ public class AudioRelaImp implements AudioRelaService {
     @Override
     public void delete(Audio_Relato audio_relato)
     {
-        this.audioRelaRepository.save(audio_relato);
+        this.audioRelaRepository.delete(audio_relato);
     }
 }

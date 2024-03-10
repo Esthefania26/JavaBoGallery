@@ -38,7 +38,7 @@ public class FotografiaImp implements FotografiaService {
     @Override
     public  void delete(Fotografia fotografia)
     {
-        this.fotografiaRepository.save(fotografia);
+        this.fotografiaRepository.delete(fotografia);
     }
 
 }

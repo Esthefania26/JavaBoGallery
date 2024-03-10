@@ -24,16 +24,19 @@ public class RolImp implements RolService {
         return this.rolRepository.findById(id);
     }
 
+    @Override
     public void create(Rol rol)
     {
         this.rolRepository.save(rol);
     }
+    @Override
     public void update(Rol rol)
     {
         this.rolRepository.save(rol);
     }
+    @Override
     public void delete(Rol rol)
     {
-        this.rolRepository.save(rol);
+        this.rolRepository.delete(rol);
     }
 }
