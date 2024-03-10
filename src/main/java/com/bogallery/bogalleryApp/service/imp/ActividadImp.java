@@ -36,7 +36,7 @@ public class ActividadImp implements ActividadService {
     @Override
     public void delete(Actividad actividad)
     {
-        this.actividadesRepository.save(actividad);
+        this.actividadesRepository.delete(actividad);
     }
 
 }
