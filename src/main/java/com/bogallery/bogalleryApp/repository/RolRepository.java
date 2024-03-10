@@ -1,13 +1,12 @@
 package com.bogallery.bogalleryApp.repository;
 
-
 import com.bogallery.bogalleryApp.entities.Audio_Relato;
-import com.bogallery.bogalleryApp.entities.Usuario;
+import com.bogallery.bogalleryApp.entities.Rol;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
+public interface RolRepository extends JpaRepository<Rol, Long> {
 
-    public Usuario findById(int id);
+    public Rol findById(int id);
 }
