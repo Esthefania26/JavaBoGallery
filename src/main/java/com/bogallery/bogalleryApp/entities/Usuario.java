@@ -28,7 +28,6 @@ public class Usuario {
     private String direccion;
     @Column (name = "Fecha_usu", nullable = false)
     private LocalDate fecha_usu;
-    private String fecha;
 
     @Column (name = "Telefono_usu", length = 12, nullable = false)
     private int telefono;

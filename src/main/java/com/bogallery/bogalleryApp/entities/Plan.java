@@ -47,7 +47,7 @@ public class Plan {
 
  //Muchos planes pueden pertenecer a una categoria
     @ManyToOne
-    @JoinColumn(name = "Id_categorias")
+    @JoinColumn(name = "Id_categorias", nullable = false)
     private Categoria categoria;
 
 //Un plan puede tener muchas promociones

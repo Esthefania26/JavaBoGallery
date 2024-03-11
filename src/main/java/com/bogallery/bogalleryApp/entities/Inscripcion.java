@@ -26,17 +26,17 @@ public class Inscripcion {
 
 //muchas inscipciones pueden ser generadas por un usuario
     @ManyToOne
-    @JoinColumn(name = "Id_usu")
+    @JoinColumn(name = "Id_usu", nullable = false)
     private Usuario usuario;
 //Muchas inscripciones pueden tener una novedad
     @ManyToOne
-    @JoinColumn(name = "Id_novedades")
+    @JoinColumn(name = "Id_novedades", nullable = false)
     private Novedad novedad;
 
  //muchas inscripciones pueden ir en un plan
 
     @ManyToOne
-    @JoinColumn(name = "Id_planes")
+    @JoinColumn(name = "Id_planes", nullable = false)
     private Plan plan;
 //una inscripcion puede generar muchas ventas
     @OneToMany(mappedBy = "inscripcion", cascade = CascadeType.ALL)

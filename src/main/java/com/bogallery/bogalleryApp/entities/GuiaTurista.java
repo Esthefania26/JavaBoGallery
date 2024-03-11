@@ -24,11 +24,11 @@ public class GuiaTurista {
 
 //Muchos guias turistsa pueden estar en un plan
     @ManyToOne
-    @JoinColumn(name = "id_plan")
+    @JoinColumn(name = "id_plan", nullable = false)
     private Plan plan;
 
     @ManyToOne
-    @JoinColumn(name = "id_perfilGuia")
+    @JoinColumn(name = "id_perfilGuia", nullable = false)
     private PerfilGuia perfilGuia;
 
 

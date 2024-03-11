@@ -31,10 +31,10 @@ public class Promocion {
     @Column(name = "Condiciones_pro", columnDefinition = "TEXT", nullable = false)
     private String condicionesPro;
     @Column(name = "Disponibilidad", length = 1, nullable = false)
-    private String disponibilidad;
+    private char disponibilidad;
 
 //muchas promociones pueden esta en un plan
     @ManyToOne
-    @JoinColumn(name = "Id_planes")
+    @JoinColumn(name = "Id_planes", nullable = false)
     private Plan plan;
 }

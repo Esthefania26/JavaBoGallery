@@ -45,7 +45,7 @@ public class Lugar {
 
     //muchos lugares van a ser registrados por un usuario
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="Id_usu")
+    @JoinColumn(name ="Id_usu", nullable = false)
     private Usuario usuario;
 
 //un lugar puede tener muchas fotografias
