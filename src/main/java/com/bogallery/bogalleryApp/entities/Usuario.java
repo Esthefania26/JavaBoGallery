@@ -12,16 +12,15 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-enum Genero {
-    MASCULINO,
-    FEMENINO,
-    OTRO
-}
+
+
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "Id_usu", length =  11, nullable = false)
     private long Id;
+
+
 
     @Column (name = "Nombre_usu", length = 30, nullable = false)
     private String nombre;
@@ -48,7 +47,11 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Genero genero;
 
-
+    enum Genero {
+        MASCULINO,
+        FEMENINO,
+        OTRO
+    }
     //un usuario puede generar muchas inscripciones
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Inscripcion> inscripciones;

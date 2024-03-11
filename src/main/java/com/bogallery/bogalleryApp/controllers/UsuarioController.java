@@ -24,6 +24,7 @@ public class UsuarioController {
     public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Objects> request){
 Map<String,Object> response=new HashMap<>();
         try{
+
             System.out.println("@@@"+request);
             Usuario usuario=new Usuario();
             //usuario.setId(Long.parseLong(request.get("Id_usu").toString()));
@@ -39,10 +40,10 @@ Map<String,Object> response=new HashMap<>();
             usuario.setPrimerI(request.get("Primer_idioma").toString());
             usuario.setSegundoI(request.get("Segundo_idioma").toString());
             //GeneroEnum genero = GeneroEnum.valueOf(request.get("Genero_usu").toString());
-            usuario.setGenero(request.get("Genero_usu").toString());
+            //usuario.setGenero(request.get("Genero_usu").toString());
             this.usuarioImp.create(usuario);
 
-            response.put("status", "succes");
+            response.put("status", "success");
             response.put("data", "Registro Exitoso");
 
         }catch (Exception e)
