@@ -38,8 +38,8 @@ Map<String,Object> response=new HashMap<>();
             usuario.setPasswaord(request.get("Password_usu").toString());
             usuario.setPrimerI(request.get("Primer_idioma").toString());
             usuario.setSegundoI(request.get("Segundo_idioma").toString());
-            /*GeneroEnum genero = GeneroEnum.valueOf(request.get("Genero_usu").toString());
-            usuario.setGenero(genero);*/
+            //GeneroEnum genero = GeneroEnum.valueOf(request.get("Genero_usu").toString());
+            usuario.setGenero(request.get("Genero_usu").toString());
             this.usuarioImp.create(usuario);
 
             response.put("status", "succes");
@@ -54,22 +54,22 @@ Map<String,Object> response=new HashMap<>();
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
-    /*
-    GetMapping("all")
-        public ResponseEntity<Map<String, Object>> findAll()
-    Map<String,Object> response=new HashMap<>();
-        {
-            try{
-                List<UsuarioList=this.usuarioImp.findAll()>
-                response.put("status", "succes");
-                response.put("data",UsuarioList);
 
-            }catch (Exception e)
-            {
-                response.put("status", HttpStatus.BAD_GATEWAY);
-                response.put("data", e.getMessage());
-                return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
-            }
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }*/
+    @GetMapping("all")
+    public ResponseEntity<Map<String, Object>> findAll(){
+    Map<String,Object> response=new HashMap<>();
+
+
+        try {
+            List<Usuario> usuarioList = this.usuarioImp.findAll();
+            response.put("status", "succes");
+            response.put("data", usuarioList);
+
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_GATEWAY);
+            response.put("data", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
