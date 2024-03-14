@@ -14,32 +14,28 @@ public class InscripcionImp implements InscripcionService {
     @Autowired
     private InscripcionRepository inscripcionRepository;
 
-    @Autowired
-    public List<Inscripcion> findAll() throws Exception{
+    @Override
+    public List<Inscripcion> findAll() throws Exception {
         return this.inscripcionRepository.findAll();
-
-    }
-
-    @Autowired
-    public Inscripcion findById(int id){
-        return this.inscripcionRepository.findById(id);
-
-
     }
 
     @Override
-    public void create(Inscripcion inscripcion){
+    public Inscripcion findById(Long id) {
+        return this.inscripcionRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void create(Inscripcion inscripcion) {
         this.inscripcionRepository.save(inscripcion);
     }
 
     @Override
-    public void update(Inscripcion inscripcion){
+    public void update(Inscripcion inscripcion) {
         this.inscripcionRepository.save(inscripcion);
     }
 
     @Override
-    public void delete(Inscripcion inscripcion){
-        this.inscripcionRepository.save(inscripcion);
+    public void delete(Inscripcion inscripcion) {
+        this.inscripcionRepository.delete(inscripcion);
     }
-
 }

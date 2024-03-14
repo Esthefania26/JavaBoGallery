@@ -9,7 +9,7 @@ public interface NovedadService {
 
     public List<Novedad> findAll() throws Exception;
 
-    public Novedad findById(int id);
+    public Novedad findById(Long id);
 
     public void create(Novedad novedad);
     public void update(Novedad novedad);

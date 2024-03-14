@@ -11,37 +11,31 @@ import java.util.List;
 @Service
 public class NovedadImp implements NovedadService {
 
-@Autowired
-
+    @Autowired
     private NovedadRepository novedadRepository;
 
-@Override
-    public List<Novedad> findAll() throws Exception{
-    return this.novedadRepository.findAll();
+    @Override
+    public List<Novedad> findAll() throws Exception {
+        return this.novedadRepository.findAll();
+    }
 
-}
-    @Autowired
-    public Novedad findById(int id){
-        return this.novedadRepository.findById(id);
-
-
+    // Este método no debería tener la anotación @Autowired
+    public Novedad findById(Long id) {
+        return this.novedadRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void create(Novedad novedad){
+    public void create(Novedad novedad) {
         this.novedadRepository.save(novedad);
     }
 
     @Override
-    public void update(Novedad novedad){
+    public void update(Novedad novedad) {
         this.novedadRepository.save(novedad);
     }
 
     @Override
-    public void delete(Novedad novedad){
-        this.novedadRepository.save(novedad);
+    public void delete(Novedad novedad) {
+        this.novedadRepository.delete(novedad);
     }
-
-
-
 }

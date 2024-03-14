@@ -4,9 +4,11 @@ import com.bogallery.bogalleryApp.entities.Fotografia;
 import com.bogallery.bogalleryApp.repository.FotografiaRepository;
 import com.bogallery.bogalleryApp.service.FotografiaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+@Service
 
 public class FotografiaImp implements FotografiaService {
     @Autowired

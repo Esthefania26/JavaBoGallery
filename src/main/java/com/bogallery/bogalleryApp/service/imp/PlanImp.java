@@ -8,12 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class PlanImp implements PlanService {
 
     @Autowired
-
     private PlanRepository planRepository;
 
     @Override
@@ -21,27 +19,24 @@ public class PlanImp implements PlanService {
         return this.planRepository.findAll();
     }
 
-        @Autowired
-        public Plan findById(int id){
-            return this.planRepository.findById(id);
-
-
-        }
-
-        @Override
-        public void create(Plan plan){
-            this.planRepository.save(plan);
-        }
-
-        @Override
-        public void update(Plan plan){
-            this.planRepository.save(plan);
-        }
-
-        @Override
-        public void delete(Plan plan){
-            this.planRepository.save(plan);
-        }
-
-
+    // Elimina la anotación @Autowired de este método
+    @Override
+    public Plan findById(Long id) {
+        return this.planRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void create(Plan plan) {
+        this.planRepository.save(plan);
+    }
+
+    @Override
+    public void update(Plan plan) {
+        this.planRepository.save(plan);
+    }
+
+    @Override
+    public void delete(Plan plan) {
+        this.planRepository.delete(plan);
+    }
+}

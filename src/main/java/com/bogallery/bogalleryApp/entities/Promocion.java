@@ -17,7 +17,7 @@ public class Promocion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "Id_promociones", length =  11, nullable = false)
-    private long Id;
+    private Long Id;
 
     @Column(name = "Descripcion_pro", columnDefinition = "TEXT", nullable = false)
     private String descripcionPro;

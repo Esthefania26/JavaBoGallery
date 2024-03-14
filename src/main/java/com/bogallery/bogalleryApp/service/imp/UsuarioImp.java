@@ -4,9 +4,11 @@ import com.bogallery.bogalleryApp.entities.Usuario;
 import com.bogallery.bogalleryApp.repository.UsuarioRepository;
 import com.bogallery.bogalleryApp.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+@Service
 
 public class UsuarioImp implements UsuarioService {
 
@@ -19,9 +21,9 @@ public class UsuarioImp implements UsuarioService {
         return this.usuarioRepository.findAll();
     }
     @Override
-    public Usuario findById(int id)
+    public Usuario findById(Long id)
     {
-        return this.usuarioRepository.findById(id);
+        return this.usuarioRepository.findById(id).orElse(null);
     }
 
     @Override

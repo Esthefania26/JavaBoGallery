@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface PlanService {
     public List<Plan> findAll() throws Exception;
 
-    public Plan findById(int id);
+    public Plan findById(Long id);
 
     public void create(Plan plan);
     public void update(Plan plan);

@@ -18,7 +18,7 @@ public class Inscripcion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "Id_inscripcion", length =  11, nullable = false)
-    private long Id;
+    private Long Id;
     @Column(name = "Fecha_insc", columnDefinition = "DATETIME", nullable = false)
     private LocalDateTime fechaInsc;
     @Column (name = "Cantidad_personas", length = 3, nullable = false)
@@ -39,7 +39,7 @@ public class Inscripcion {
     @JoinColumn(name = "Id_planes", nullable = false)
     private Plan plan;
 //una inscripcion puede generar muchas ventas
-    @OneToMany(mappedBy = "inscripcion", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "inscripciones", cascade = CascadeType.ALL)
     private List<Venta> venta;
 
 

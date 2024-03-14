@@ -51,6 +51,7 @@ public class Lugar {
 //un lugar puede tener muchas fotografias
     @OneToMany(mappedBy = "lugar", cascade = CascadeType.ALL)
     private List<Fotografia> fotografia;
+
 //un lugar puede tener muchso autiorelatos
     @OneToMany(mappedBy = "lugar", cascade = CascadeType.ALL)
     private List<Audio_Relato> audioRelato;

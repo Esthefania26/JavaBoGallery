@@ -4,9 +4,12 @@ import com.bogallery.bogalleryApp.entities.PerfilGuia;
 import com.bogallery.bogalleryApp.repository.PerlfilGuiRepository;
 import com.bogallery.bogalleryApp.service.PerfilGuiService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+@Service
 public class PerfilGuiImp implements PerfilGuiService {
 
     @Autowired
@@ -18,9 +21,10 @@ public class PerfilGuiImp implements PerfilGuiService {
     }
 
     @Override
-    public PerfilGuia findById(int id)
+    public PerfilGuia findById(Long id)
     {
-        return this.perlfilGuiRepository.findById(id);
+        return this.perlfilGuiRepository.findById(id).orElse(null);
+
     }
     @Override
     public void create(PerfilGuia perfilGuia)

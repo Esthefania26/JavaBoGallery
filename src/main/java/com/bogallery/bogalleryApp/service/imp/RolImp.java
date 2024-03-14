@@ -4,9 +4,12 @@ import com.bogallery.bogalleryApp.entities.Rol;
 import com.bogallery.bogalleryApp.repository.RolRepository;
 import com.bogallery.bogalleryApp.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+@Service
 public class RolImp implements RolService {
 
     @Autowired
@@ -19,9 +22,10 @@ public class RolImp implements RolService {
     }
     @Override
 
-    public Rol findById(int id)
+    public Rol findById(Long id)
     {
-        return this.rolRepository.findById(id);
+        return this.rolRepository.findById(id).orElse(null);
+
     }
 
     @Override

@@ -10,35 +10,33 @@ import java.util.List;
 
 @Service
 public class PagoImp implements PagoService {
-    @Autowired
 
+    @Autowired
     private PagoRepository pagoRepository;
 
     @Override
-    public List<Pago> findAll() throws Exception{
+    public List<Pago> findAll() throws Exception {
         return this.pagoRepository.findAll();
-
     }
-    @Autowired
-    public Pago findById(int id){
-        return this.pagoRepository.findById(id);
 
-
+    // Este método no debería tener la anotación @Autowired
+    @Override
+    public Pago findById(Long id) {
+        return this.pagoRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void create(Pago pago){
+    public void create(Pago pago) {
         this.pagoRepository.save(pago);
     }
 
     @Override
-    public void update(Pago pago){
+    public void update(Pago pago) {
         this.pagoRepository.save(pago);
     }
 
     @Override
-    public void delete(Pago pago){
-        this.pagoRepository.save(pago);
+    public void delete(Pago pago) {
+        this.pagoRepository.delete(pago);
     }
-
 }

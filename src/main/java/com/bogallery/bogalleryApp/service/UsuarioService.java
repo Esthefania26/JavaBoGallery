@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface UsuarioService {
     public List<Usuario> findAll() throws Exception;
 
-    public Usuario findById(int id);
+    public Usuario findById(Long id);
     public  void create(Usuario usuario);
 
     public  void update(Usuario usuario);

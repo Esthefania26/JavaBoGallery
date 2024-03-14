@@ -9,7 +9,7 @@ public interface VentaService {
 
     public List<Venta> findAll() throws Exception;
 
-    public Venta findById(int id);
+    public Venta findById(Long id);
 
     public void create(Venta venta);
     public void update(Venta venta);

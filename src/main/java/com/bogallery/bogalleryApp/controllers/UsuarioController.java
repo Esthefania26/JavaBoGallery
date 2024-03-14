@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +21,10 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioImp usuarioImp;
+
+    public UsuarioController(UsuarioImp usuarioImp) {
+        this.usuarioImp = usuarioImp;
+    }
     @PostMapping("create")
 
     public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Objects> request){
@@ -32,15 +38,19 @@ Map<String,Object> response=new HashMap<>();
             usuario.setApellido(request.get("Apellido_uso").toString());
             usuario.setEdad(Integer.parseInt(request.get("Edad").toString()));
             usuario.setDireccion(request.get("Direccion_usu").toString());
-           /* DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según tus necesidades
-            usuario.setFecha(LocalDate.parse(request.get("Fecha_usu").toString(), formatter));
-*/          usuario.setTelefono(Integer.parseInt(request.get("Telefono_usu").toString()));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate fechaUsu = LocalDate.parse(request.get("Fecha_usu").toString(), formatter);
+            usuario.setFecha_usu(fechaUsu);
+
+            // usuario.setFecha_usu(LocalDate.parse(request.get("Fecha_usu").toString()));
+          usuario.setTelefono(Integer.parseInt(request.get("Telefono_usu").toString()));
             usuario.setCoreo(request.get("Correo_usu").toString());
             usuario.setPasswaord(request.get("Password_usu").toString());
             usuario.setPrimerI(request.get("Primer_idioma").toString());
             usuario.setSegundoI(request.get("Segundo_idioma").toString());
-            //GeneroEnum genero = GeneroEnum.valueOf(request.get("Genero_usu").toString());
-            //usuario.setGenero(request.get("Genero_usu").toString());
+           // GeneroEnum generoEnum = GeneroEnum.fromString(request.get("Genero_usu").toString());
+           // usuario.setGenero(generoEnum);
+
             this.usuarioImp.create(usuario);
 
             response.put("status", "success");
@@ -72,5 +82,22 @@ Map<String,Object> response=new HashMap<>();
             return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Usuario usuario = this.usuarioImp.findById(id);
+
+            usuarioImp.delete(usuario);
+            response.put("status", "success");
+            response.put("message", "Usuario eliminado correctamente");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
     }
 }

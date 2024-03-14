@@ -19,7 +19,7 @@ public class Plan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "Id_planes", length =  11, nullable = false)
-    private long Id;
+    private Long Id;
     @Column (name = "NombreP", length = 40, nullable = false)
     private String nombreP;
     @Column(name = "DescripcionP", columnDefinition = "TEXT", nullable = false)

@@ -4,9 +4,12 @@ import com.bogallery.bogalleryApp.entities.Lugar;
 import com.bogallery.bogalleryApp.repository.LugarRepository;
 import com.bogallery.bogalleryApp.service.LugarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+@Service
 public class LugarImp implements LugarService {
     @Autowired
     private LugarRepository lugarRepository;

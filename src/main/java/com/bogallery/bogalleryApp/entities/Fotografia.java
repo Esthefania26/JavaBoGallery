@@ -1,10 +1,7 @@
 package com.bogallery.bogalleryApp.entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,5 +21,9 @@ public class Fotografia {
 
     @Column(name = "Fotografia", nullable = false)
     private byte[] fotografia;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_lugar", nullable = false)
+    private  Lugar lugar;
 
 }

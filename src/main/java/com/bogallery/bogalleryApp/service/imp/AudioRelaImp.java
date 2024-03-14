@@ -4,9 +4,11 @@ import com.bogallery.bogalleryApp.entities.Audio_Relato;
 import com.bogallery.bogalleryApp.repository.AudioRelaRepository;
 import com.bogallery.bogalleryApp.service.AudioRelaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+@Service
 
 public class AudioRelaImp implements AudioRelaService {
     @Autowired

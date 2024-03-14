@@ -8,7 +8,7 @@ public interface PerfilGuiService {
 
     public List<PerfilGuia> findAll() throws  Exception;
 
-    public PerfilGuia findById(int id);
+    public PerfilGuia findById(Long id);
 
     public void create(PerfilGuia perfilGuia);
 

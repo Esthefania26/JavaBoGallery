@@ -8,7 +8,7 @@ public interface RolService {
 
     public List<Rol> findAll() throws Exception;
 
-    public Rol findById(int id);
+    public Rol findById(Long id);
 
     public void create(Rol rol);
     public void update(Rol rol);

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface PromocionService {
     public List<Promocion> findAll() throws Exception;
 
-    public Promocion findById(int id);
+    public Promocion findById(Long id);
 
     public void create(Promocion promocion);
     public void update(Promocion promocion);

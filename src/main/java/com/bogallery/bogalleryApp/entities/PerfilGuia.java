@@ -18,7 +18,7 @@ public class PerfilGuia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "Id_perfilGuia", length =  11, nullable = false)
-    private long Id;
+    private Long Id;
 
     @Column (name = "NombreG", length = 40, nullable = false)
     private String nombreG;

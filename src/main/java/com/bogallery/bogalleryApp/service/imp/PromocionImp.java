@@ -10,38 +10,33 @@ import java.util.List;
 
 @Service
 public class PromocionImp implements PromocionService {
-    @Autowired
 
+    @Autowired
     private PromocionRepository promocionRepository;
 
     @Override
     public List<Promocion> findAll() throws Exception {
         return this.promocionRepository.findAll();
-
     }
 
-    @Autowired
-    public Promocion findById(int id) {
-        return this.promocionRepository.findById(id);
-
-
-    }
+    // Elimina la anotación @Autowired de este método
     @Override
-    public void create(Promocion promocion){
+    public Promocion findById(Long id) {
+        return this.promocionRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void create(Promocion promocion) {
         this.promocionRepository.save(promocion);
     }
 
     @Override
-    public void update(Promocion promocion){
+    public void update(Promocion promocion) {
         this.promocionRepository.save(promocion);
     }
 
     @Override
-    public void delete(Promocion promocion){
-        this.promocionRepository.save(promocion);
+    public void delete(Promocion promocion) {
+        this.promocionRepository.delete(promocion);
     }
-
-
-
-
 }

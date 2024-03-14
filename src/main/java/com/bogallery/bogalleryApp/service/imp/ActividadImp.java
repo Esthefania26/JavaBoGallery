@@ -4,9 +4,12 @@ import com.bogallery.bogalleryApp.entities.Actividad;
 import com.bogallery.bogalleryApp.repository.ActividadesRepository;
 import com.bogallery.bogalleryApp.service.ActividadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
+@Service
 
 public class ActividadImp implements ActividadService {
     @Autowired
