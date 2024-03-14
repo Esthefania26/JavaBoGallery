@@ -21,9 +21,9 @@ public class ActividadImp implements ActividadService {
         return this.actividadesRepository.findAll();
     }
     @Override
-    public Actividad findById(int id)
+    public Actividad findById(Long id)
     {
-        return this.actividadesRepository.findById(id);
+        return this.actividadesRepository.findById(id).orElse(null);
     }
     @Override
     public void create(Actividad actividad)

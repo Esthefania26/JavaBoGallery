@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface FotografiaService {
     public List<Fotografia> findAll() throws Exception;
 
-    public Fotografia findById(int id);
+    public Fotografia findById(Long id);
 
     public  void create(Fotografia fotografia);
 

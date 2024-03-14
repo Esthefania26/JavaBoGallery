@@ -9,7 +9,7 @@ public interface EmpresaServicie {
 
     public List<Empresa> findAll() throws Exception;
 
-    public Empresa findById(int id);
+    public Empresa findById(Long id);
 
     public void create(Empresa empresa);
     public void update(Empresa empresa);

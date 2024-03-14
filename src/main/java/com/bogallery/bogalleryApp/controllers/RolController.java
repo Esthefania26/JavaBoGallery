@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -18,16 +20,18 @@ public class RolController {
 
     @Autowired
     RolImp rolImp;
+
     @PostMapping("create")
     public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Objects> request) {
         Map<String, Object> response = new HashMap<>();
         try {
             System.out.println("@@@" + request);
-            Rol rol=new Rol();
+            Rol rol = new Rol();
             rol.setNombreR(request.get("Nombre_rol").toString());
             rol.setDescripcion_rol(request.get("Descripcion_rol").toString());
-            /*DateTimeFormatter formatterFechaR = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según tus necesidades
-            rol.setFechaRegistroR(LocalDate.parse(request.get("Fecha_registroR").toString(), formatterFechaR));*/
+           DateTimeFormatter formatterFechaR = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            rol.setFecha_registroR(LocalDate.parse(request.get("Fecha_registroR").toString(), formatterFechaR));
+
             //rol.setEstado(request.get("Estado").charAt(0));
 
 
@@ -43,4 +47,62 @@ public class RolController {
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Rol rol = this.rolImp.findById(id);
+
+            rolImp.delete(rol);
+            response.put("status", "success");
+            response.put("message", "rol eliminado correctamente");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+    @PutMapping("update/{id}")
+    public ResponseEntity<Map<String, Object>> update(@PathVariable Long id, @RequestBody Map<String, Object> request) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Rol rol = this.rolImp.findById(id);
+
+            if (rol == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("message", "El rol con ID " + id + " no existe");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+
+            if (request.containsKey("Nombre_rol")) {
+                rol.setNombreR(request.get("Nombre_rol").toString());
+            }
+
+            if (request.containsKey("Descripcion_rol")) {
+                rol.setDescripcion_rol(request.get("Descripcion_rol").toString());
+            }
+
+           if (request.containsKey("Fecha_registroR")) {
+                DateTimeFormatter formatterFechaR = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate fechaRegistro = LocalDate.parse(request.get("Fecha_registroR").toString(), formatterFechaR);
+                rol.setFecha_registroR(fechaRegistro);
+            }
+
+
+            this.rolImp.update(rol);
+
+            response.put("status", HttpStatus.OK);
+            response.put("message", "Rol actualizado correctamente");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
+

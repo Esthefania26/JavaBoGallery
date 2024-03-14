@@ -57,4 +57,70 @@ public class PerfilGuiController {
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            PerfilGuia perfilGuia = this.perfilGuiImp.findById(id);
+
+
+            perfilGuiImp.delete(perfilGuia);
+            response.put("status", "success");
+            response.put("message", "Usuario eliminado correctamente");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("update/{id}")
+    public ResponseEntity<Map<String, Object>> update(@PathVariable Long id, @RequestBody Map<String, Object> request) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            PerfilGuia perfilGuia = this.perfilGuiImp.findById(id);
+
+            if (perfilGuia == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "PerfilGuia no encontrado");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+
+            if (request.containsKey("NombreG")) {
+                perfilGuia.setNombreG(request.get("NombreG").toString());
+            }
+            if (request.containsKey("ApellidoG")) {
+                perfilGuia.setApellidoG(request.get("ApellidoG").toString());
+            }
+            if (request.containsKey("CorreoG")) {
+                perfilGuia.setCorreoG(request.get("CorreoG").toString());
+            }
+            if (request.containsKey("Formacion")) {
+                perfilGuia.setFormacion(request.get("Formacion").toString());
+            }
+            if (request.containsKey("Idioma_materno")) {
+                perfilGuia.setIdiomaM(request.get("Idioma_materno").toString());
+            }
+            if (request.containsKey("Segundo_idioma")) {
+                perfilGuia.setSegundoI(request.get("Segundo_idioma").toString());
+            }
+            if (request.containsKey("TelefonoG")) {
+                perfilGuia.setTelefonoG(Integer.parseInt(request.get("TelefonoG").toString()));
+            }
+
+            this.perfilGuiImp.update(perfilGuia);
+
+            response.put("status", "success");
+            response.put("data", "Perfil de Guía actualizado correctamente");
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

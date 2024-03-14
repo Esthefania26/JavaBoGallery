@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class Rol {
     private String descripcion_rol;
 
     @Column(name = "Fecha_registroR", columnDefinition = "DATETIME", nullable = false)
-    private LocalDateTime fecha_registroR;
+    private LocalDate fecha_registroR;
 
     @Column(name = "Estado", length = 1, nullable = false)
     private char estado;

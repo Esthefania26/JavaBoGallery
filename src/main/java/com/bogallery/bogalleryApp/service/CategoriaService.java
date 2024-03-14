@@ -10,7 +10,7 @@ public interface CategoriaService {
 
     public List<Categoria> findAll() throws Exception;
 
-    public Categoria findById(int id);
+    public Categoria findById(Long id);
 
     public void create(Categoria categoria);
     public void update(Categoria categoria);

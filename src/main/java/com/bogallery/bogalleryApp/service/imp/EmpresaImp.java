@@ -22,9 +22,9 @@ public class EmpresaImp implements EmpresaServicie {
     }
 
     @Override
-    public Empresa findById(int id){
+    public Empresa findById(Long id){
 
-        return this.empresaRepository.findById(id);
+        return this.empresaRepository.findById(id).orElse(null);
     }
 
     @Override
