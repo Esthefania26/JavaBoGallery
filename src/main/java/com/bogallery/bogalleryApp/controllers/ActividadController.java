@@ -21,7 +21,7 @@ public class ActividadController {
 
     @PostMapping("create")
 
-    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Objects> request) {
+    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request) {
         Map<String, Object> response = new HashMap<>();
         try {
             System.out.println("@@@" + request);
