@@ -27,6 +27,9 @@ public class NovedadController {
             System.out.println("@@@@"+request);
             Novedad novedad = new Novedad();
 
+            novedad.setDescripcionN(request.get("descripcionN").toString());
+            novedad.setEstadoN(request.get("estadoN").toString());
+
 
             response.put("status","success");
             response.put("data","Registro Exitoso");
