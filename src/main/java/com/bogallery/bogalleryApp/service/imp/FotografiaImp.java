@@ -20,9 +20,9 @@ public class FotografiaImp implements FotografiaService {
         return this.fotografiaRepository.findAll();
     }
     @Override
-    public Fotografia findById(int id)
+    public Fotografia findById(Long id)
     {
-        return this.fotografiaRepository.findById(id);
+        return this.fotografiaRepository.findById(id).orElse(null);
     }
 
     @Override

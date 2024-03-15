@@ -19,7 +19,7 @@ public class Lugar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column( name = "Id_lugar", length = 11, nullable = false)
-    private long id;
+    private Long id;
 
     @Column( name = "NombreL", length = 50, nullable = false)
     private String nombreL;

@@ -9,7 +9,7 @@ public interface ActividadService {
 
     public List<Actividad> findAll() throws Exception;
 
-    public Actividad findById(int id);
+    public Actividad findById(Long id);
     public  void create(Actividad actividad);
 
     public  void update(Actividad actividad);

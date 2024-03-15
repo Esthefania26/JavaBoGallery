@@ -8,7 +8,7 @@ public interface AudioRelaService {
 
     public List<Audio_Relato> findAll() throws Exception;
 
-    public  Audio_Relato findById(int id);
+    public  Audio_Relato findById(Long id);
 
     public void create(Audio_Relato audio_relato);
 

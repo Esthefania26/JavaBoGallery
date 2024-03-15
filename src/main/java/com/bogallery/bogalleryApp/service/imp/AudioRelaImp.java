@@ -21,9 +21,10 @@ public class AudioRelaImp implements AudioRelaService {
     }
 
     @Override
-    public  Audio_Relato findById(int id)
+    public  Audio_Relato findById(Long id)
     {
-        return this.audioRelaRepository.findById(id);
+
+        return this.audioRelaRepository.findById(id).orElse(null);
     }
 
     @Override

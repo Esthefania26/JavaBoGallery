@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Fotografia {
     @Id
     @Column( name = "Id_fotogradia", length = 11, nullable = false)
-    private long id;
+    private Long id;
 
     @Column(name = "DescripcionF", columnDefinition = "TEXT", nullable = false)
     private String descripcionF;

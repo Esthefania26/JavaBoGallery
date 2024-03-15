@@ -21,9 +21,9 @@ public class LugarImp implements LugarService {
     }
 
     @Override
-    public Lugar findById(int id)
+    public Lugar findById(Long id)
     {
-        return this.lugarRepository.findById(id);
+        return this.lugarRepository.findById(id).orElse(null);
     }
 
     @Override

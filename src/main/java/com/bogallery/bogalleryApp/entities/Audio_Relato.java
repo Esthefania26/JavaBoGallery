@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Audio_Relato {
     @Id
     @Column( name = "Id_AudioR", length = 11, nullable = false)
-    private long id;
+    private Long id;
 
     @Column( name = "NombreAR", length = 50, nullable = false)
     private String nombreAR;

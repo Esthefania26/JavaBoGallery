@@ -23,8 +23,9 @@ public class CategoriaImp implements CategoriaService {
     }
 
     @Override
-    public Categoria findById(int id) {
-        return this.categoriaRepository.findById(id);
+    public Categoria findById(Long id) {
+
+        return this.categoriaRepository.findById(id).orElse(null);
     }
 
     @Override
