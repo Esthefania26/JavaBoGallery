@@ -26,7 +26,11 @@ public class InscripcionController {
 
             System.out.println("@@@@"+request);
             Inscripcion inscripcion = new Inscripcion();
+            //inscripcion.setFechaInsc(request.get("FechaInsc").hashCode());
+            inscripcion.setCantidad_personas(request.get("Cantidad_personas").hashCode());
+            //inscripcion.setFechaInsc(request.get("FechaInsc").hashCode());
 
+            this.inscripcionImp.create(inscripcion);
             response.put("status","success");
             response.put("data","Registro Exitoso");
         }catch (Exception e){

@@ -24,6 +24,9 @@ public class VentaController {
         try {
             System.out.println("@@@@"+request);
             Venta venta = new Venta();
+            venta.setComision_venta(request.get("Comision_venta").hashCode());
+            venta.setTotal_ventas(request.get("Total_ventas").hashCode());
+            //venta.setFecha_venta(request.get("Fecha_venta").hashCode());
 
 
             response.put("status","success");

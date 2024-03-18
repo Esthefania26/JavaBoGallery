@@ -25,6 +25,12 @@ public class PromocionController {
         try {
             System.out.println("@@@@"+request);
             Promocion promocion = new Promocion();
+            promocion.setCondicionesPro(request.get("CondicionesPro").toString());
+            promocion.setDescripcionPro(request.get("DescripcionPro").toString());
+          //  promocion.setDisponibilidad(request.get("Disponibilidad").toString());
+            promocion.setTipoPro(request.get("TipoPro").toString());
+          //  promocion.setFechainiciopro(request.get("Fechainiciopro").toString());
+            //  promocion.setFechafinpro(request.get("Fechafinpro").toString());
 
 
             response.put("status","success");

@@ -26,6 +26,13 @@ public class PagoController {
             System.out.println("@@@@"+request);
             Pago pago = new Pago();
 
+            pago.setMontoTotalP(request.get("MontoTotalP").hashCode());
+            pago.setCodidoComprobante(request.get("CodigoComprobante").hashCode());
+            pago.setDescripcioP(request.get("DescripcionP").toString());
+            pago.setTipoP(request.get("TipoP").toString());
+            //pago.setArchivoComprobante(request.get("ArchivoComprobante").toString());
+
+this.pagoImp.create(pago);
 
             response.put("status","success");
             response.put("data","Registro Exitoso");

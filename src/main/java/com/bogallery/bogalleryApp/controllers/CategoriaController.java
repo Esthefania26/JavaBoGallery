@@ -25,6 +25,7 @@ public class CategoriaController {
             System.out.println("@@@@"+request);
             Categoria categoria= new Categoria();
 
+
             categoria.setDescripcionC(request.get("descripcionC").toString());
 this.categoriaImp.create(categoria);
             response.put("status","success");
