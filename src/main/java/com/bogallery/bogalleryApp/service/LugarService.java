@@ -9,7 +9,7 @@ public interface LugarService {
 
     public List<Lugar> findAll() throws  Exception;
 
-    public Lugar findById(int id);
+    public Lugar findById(Long id);
 
     public void create(Lugar lugar);
     public void update(Lugar lugar);
