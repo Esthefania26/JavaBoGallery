@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -30,8 +33,9 @@ public class PlanController {
             plan.setTotalcuposP(request.get("totalcuposP").hashCode());
             plan.setPrecioP(request.get("precioP").hashCode());
             plan.setJornadaP(request.get("jornadaP").toString());
-            //plan.setFechaP(request.get("fechaP").());
-            //plan.setFechafinalP(request.get("fechafinalP").toString())
+            DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según tus necesidades
+            plan.setFechaP(LocalDateTime.parse(request.get("FechaP").toString(), formatterFechaL));
+            plan.setFechafinalP(LocalDateTime.parse(request.get("FechafinalP").toString(), formatterFechaL));
 
             this.planImp.create(plan);
             response.put("status","succes");
@@ -45,5 +49,66 @@ public class PlanController {
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Plan plan = this.planImp.findById(id);
+            planImp.delete(plan);
+            response.put("status", "success");
+            response.put("message", "Plan eliminado correctamente");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
 
+    @PutMapping("update/{id}")
+    public ResponseEntity<Map<String, Object>> update(@PathVariable Long id, @RequestBody Map<String, Object> request) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Plan plan = this.planImp.findById(id);
+            if (plan == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Plan no encontrado");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+            if (request.containsKey("nombreP")) {
+                plan.setNombreP(request.get("nombreP").toString());
+            }
+            if (request.containsKey("descripcionP")) {
+                plan.setDescripcionP(request.get("descripcionP").toString());
+            }
+            if (request.containsKey("propietario_plan")) {
+                plan.setPropietario_plan(request.get("propietario_plan").toString());
+            }
+            if (request.containsKey("totalcuposP")) {
+                plan.setTotalcuposP(Integer.parseInt(request.get("totalcuposP").toString()));
+            }
+            if (request.containsKey("precioP")) {
+                plan.setPrecioP(Integer.parseInt(request.get("precioP").toString()));
+            }
+            if (request.containsKey("jornadaP")) {
+                plan.setJornadaP(request.get("jornadaP").toString());
+            }
+            if (request.containsKey("FechaP")) {
+                DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                plan.setFechaP(LocalDateTime.parse(request.get("FechaP").toString(), formatterFechaL));
+            }
+            if (request.containsKey("FechafinalP")) {
+                DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                plan.setFechafinalP(LocalDateTime.parse(request.get("FechafinalP").toString(), formatterFechaL));
+            }
+            this.planImp.update(plan);
+            response.put("status", "success");
+            response.put("data", "Plan actualizado correctamente");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
 }

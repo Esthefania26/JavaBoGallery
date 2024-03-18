@@ -27,7 +27,7 @@ public class FotografiaController {
             Fotografia fotografia=new Fotografia();
 
             fotografia.setDescripcionF(request.get("DescripcionF").toString());
-           // fotografia.setFotografia((byte[]) request.get("Fotografia"));
+           // fotografia.setFotografia((byte[]) request.get("fotografia"));
 
             this.fotografiaImp.create(fotografia);
             response.put("status", "succes");
