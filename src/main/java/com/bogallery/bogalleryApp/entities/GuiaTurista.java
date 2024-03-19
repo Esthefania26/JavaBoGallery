@@ -17,7 +17,7 @@ public class GuiaTurista {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "Id_Guia ", length =  11, nullable = false)
-    private long Id;
+    private Long Id;
 
     @Column(name = "Descripcion_Gt", columnDefinition = "TEXT", nullable = false)
     private String descripcionGt;

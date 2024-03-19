@@ -29,10 +29,10 @@ public class RolController {
             Rol rol = new Rol();
             rol.setNombreR(request.get("Nombre_rol").toString());
             rol.setDescripcion_rol(request.get("Descripcion_rol").toString());
-           DateTimeFormatter formatterFechaR = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter formatterFechaR = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             rol.setFecha_registroR(LocalDate.parse(request.get("Fecha_registroR").toString(), formatterFechaR));
 
-            //rol.setEstado(request.get("Estado").charAt(0));
+            rol.setEstado(request.get("Estado").toString().charAt(0));
 
 
             this.rolImp.create(rol);

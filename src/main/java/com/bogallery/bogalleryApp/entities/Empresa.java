@@ -16,12 +16,12 @@ import java.util.List;
 public class Empresa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue()
     @Column(name = "Nit_empresa", length = 15, nullable = false)
     private Long nit;
 
     @Column(name = "Nombre_em", length = 50, nullable = false)
-    private String NombreEm;
+    private String nombreEm;
 
     @Column(name = "Razon_social", length = 100, nullable = false)
     private String razon;

@@ -30,7 +30,10 @@ public class PagoController {
             pago.setCodidoComprobante(request.get("CodigoComprobante").hashCode());
             pago.setDescripcioP(request.get("DescripcionP").toString());
             pago.setTipoP(request.get("TipoP").toString());
-            //pago.setArchivoComprobante(request.get("ArchivoComprobante").toString());
+            if(request.containsKey("ArchivoComprobante") && request.get("ArchivoComprobante") !=null){
+                pago.setArchivoComprobante(request.get("ArchivoComprobante").toString().getBytes());
+            }
+
 
 this.pagoImp.create(pago);
 

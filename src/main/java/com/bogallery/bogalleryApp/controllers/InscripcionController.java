@@ -28,8 +28,8 @@ public class InscripcionController {
 
             System.out.println("@@@@"+request);
             Inscripcion inscripcion = new Inscripcion();
-            DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según tus necesidades
-            inscripcion.setFecha_insc(LocalDate.parse(request.get("Fecha_insc").toString(), formatterFechaL));
+            DateTimeFormatter formatterFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según tus necesidades
+            inscripcion.setFecha_insc(LocalDate.parse(request.get("Fecha_insc").toString(), formatterFecha));
             inscripcion.setCantidad_personas(request.get("Cantidad_personas").hashCode());
 
 

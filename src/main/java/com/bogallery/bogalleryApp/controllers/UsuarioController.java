@@ -27,13 +27,12 @@ public class UsuarioController {
     }
     @PostMapping("create")
 
-    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Objects> request){
+    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request){
 Map<String,Object> response=new HashMap<>();
         try{
 
             System.out.println("@@@"+request);
             Usuario usuario=new Usuario();
-            //usuario.setId(Long.parseLong(request.get("Id_usu").toString()));
             usuario.setNombre(request.get("Nombre_usu").toString());
             usuario.setApellido(request.get("Apellido_uso").toString());
             usuario.setEdad(Integer.parseInt(request.get("Edad").toString()));
@@ -41,15 +40,13 @@ Map<String,Object> response=new HashMap<>();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate fechaUsu = LocalDate.parse(request.get("Fecha_usu").toString(), formatter);
             usuario.setFecha_usu(fechaUsu);
-
-            // usuario.setFecha_usu(LocalDate.parse(request.get("Fecha_usu").toString()));
-          usuario.setTelefono(Integer.parseInt(request.get("Telefono_usu").toString()));
+            usuario.setTelefono(Integer.parseInt(request.get("Telefono_usu").toString()));
             usuario.setCoreo(request.get("Correo_usu").toString());
             usuario.setPasswaord(request.get("Password_usu").toString());
             usuario.setPrimerI(request.get("Primer_idioma").toString());
             usuario.setSegundoI(request.get("Segundo_idioma").toString());
-           // GeneroEnum generoEnum = GeneroEnum.fromString(request.get("Genero_usu").toString());
-           // usuario.setGenero(generoEnum);
+            usuario.setGenero(request.get("Genero_usu").toString());
+
 
             this.usuarioImp.create(usuario);
 

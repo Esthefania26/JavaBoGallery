@@ -29,7 +29,7 @@ public class PromocionController {
             Promocion promocion = new Promocion();
             promocion.setCondicionesPro(request.get("CondicionesPro").toString());
             promocion.setDescripcionPro(request.get("DescripcionPro").toString());
-          //  promocion.setDisponibilidad(request.get("Disponibilidad").toString());
+            promocion.setDisponibilidad(request.get("Disponibilidad").toString().charAt(0));
             promocion.setTipoPro(request.get("TipoPro").toString());
             DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según tus necesidades
             promocion.setFechainiciopro(LocalDateTime.parse(request.get("Fechainiciopro").toString(), formatterFechaL));

@@ -43,15 +43,10 @@ public class Usuario {
     private String primerI;
     @Column (name = "Segundo_idioma", length = 50, nullable = false)
     private String segundoI;
-    @Column(name = "Genero_usu", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Genero genero;
 
-    enum Genero {
-        MASCULINO,
-        FEMENINO,
-        OTRO
-    }
+    @Column(name = "Genero_usu", length = 100, nullable = false)
+    private String genero;
+
     //un usuario puede generar muchas inscripciones
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Inscripcion> inscripciones;

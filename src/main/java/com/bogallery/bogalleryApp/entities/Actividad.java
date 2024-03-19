@@ -31,16 +31,9 @@ public class Actividad {
     @Column(name = "Fecha_finACT", columnDefinition = "DATETIME", nullable = false)
     private LocalDateTime fechaFinACT;
 
+    @Column(name = "Jornada", length = 100, nullable = false)
+    private String jornada;
 
-    @Column(name = "Jornada", length = 30, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Jornada jornada;
-    public enum Jornada {
-        MAÑANA,
-        TARDE,
-        NOCHE,
-        OTRO
-    }
 
     @Column( name = "Valor", length = 10, nullable = false)
     private int valor;

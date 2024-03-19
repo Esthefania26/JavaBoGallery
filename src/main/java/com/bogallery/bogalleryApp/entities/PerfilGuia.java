@@ -47,16 +47,11 @@ public class PerfilGuia {
     @Column (name = "Segundo_idioma", length = 40, nullable = false)
     private String segundoI;
 
-    @Column(name = "GeneroG", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Usuario.Genero genero;
-    public enum genero {
-        MASCULINO,
-        FEMENINO,
-        OTRO
+
+    @Column(name = "GeneroG", length = 100, nullable = false)
+    private String genero;
 
 
-    }
     @OneToMany(mappedBy = "perfilGuia", cascade = CascadeType.ALL)
     private List<GuiaTurista> guiaTurista;
 }

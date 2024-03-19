@@ -27,7 +27,7 @@ public class CategoriaController {
 
 
             categoria.setDescripcionC(request.get("descripcionC").toString());
-this.categoriaImp.create(categoria);
+            this.categoriaImp.create(categoria);
             response.put("status","success");
             response.put("data","Registro Exitoso");
         }catch (Exception e){

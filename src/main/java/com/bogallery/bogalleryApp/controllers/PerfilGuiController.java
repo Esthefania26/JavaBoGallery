@@ -39,12 +39,14 @@ public class PerfilGuiController {
 
             perfilGuia.setTelefonoG(Integer.parseInt(request.get("TelefonoG").toString()));
 
-            //perfilGuia.setCertificado(request.get("Certificado").getBytes());
+            if(request.containsKey("Certificado") && request.get("Certificado") !=null){
+                perfilGuia.setCertificado(request.get("Certificado").toString().getBytes());
+            }
 
             perfilGuia.setLenguaSena(Boolean.parseBoolean(request.get("Lengua_sena").toString()));
+            perfilGuia.setGenero(request.get("GeneroG").toString());
 
-           /* GeneroGEnumType generoG = GeneroGEnumType.valueOf(request.get("GeneroG").toString());
-            perfilGuia.setGeneroG(generoG);*/
+
 
             this.perfilGuiImp.create(perfilGuia);
             response.put("status", "succes");

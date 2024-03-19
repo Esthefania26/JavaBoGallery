@@ -26,7 +26,6 @@ public class PlanController {
         try{
             System.out.println("@@@@"+request);
             Plan plan= new Plan();
-            //plan.setId(Long.parseLong(request.get("id").toString()));
             plan.setNombreP(request.get("nombreP").toString());
             plan.setDescripcionP(request.get("descripcionP").toString());
             plan.setPropietario_plan(request.get("propietario_plan").toString());

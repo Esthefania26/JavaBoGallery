@@ -27,7 +27,10 @@ public class FotografiaController {
             Fotografia fotografia=new Fotografia();
 
             fotografia.setDescripcionF(request.get("DescripcionF").toString());
-           // fotografia.setFotografia((byte[]) request.get("fotografia"));
+
+            if(request.containsKey("fotografia") && request.get("fotografia") !=null){
+                fotografia.setFotografia(request.get("fotografia").toString().getBytes());
+            }
 
             this.fotografiaImp.create(fotografia);
             response.put("status", "succes");
