@@ -34,6 +34,10 @@ public class InscripcionController {
 
 
             this.inscripcionImp.create(inscripcion);
+
+            inscripcion.setCantidad_personas(request.get("cantidad_personas").hashCode());
+            //inscripcion.setFechaInsc(request.get("fechaInsc").toString());
+
             response.put("status","success");
             response.put("data","Registro Exitoso");
         }catch (Exception e){

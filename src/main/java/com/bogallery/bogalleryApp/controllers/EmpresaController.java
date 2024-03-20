@@ -27,6 +27,7 @@ public class EmpresaController {
         try {
             System.out.println("@@@@"+request);
             Empresa empresa = new Empresa();
+
             empresa.setNit(Long.parseLong(request.get("nit").toString()));
             empresa.setNombreEm(request.get("nombreEm").toString());
             empresa.setBarrioEm(request.get("barrioEm").toString());
@@ -39,6 +40,8 @@ public class EmpresaController {
             empresa.setRazon(request.get("razon").toString());
             empresa.setTelefono_em(request.get("telefono").hashCode());
             empresa.setRut(request.get("rut").hashCode());
+
+
 
             response.put("status","success");
             response.put("data","Registro Exitoso");

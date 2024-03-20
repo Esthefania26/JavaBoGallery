@@ -20,7 +20,7 @@ import java.util.Objects;
 public class UsuarioController {
 
     @Autowired
-     UsuarioImp usuarioImp;
+    UsuarioImp usuarioImp;
 
     public UsuarioController(UsuarioImp usuarioImp) {
         this.usuarioImp = usuarioImp;
@@ -28,34 +28,40 @@ public class UsuarioController {
     @PostMapping("create")
 
     public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request){
-        Map<String,Object> response=new HashMap<>();
-        try {
+Map<String,Object> response=new HashMap<>();
+        try{
+
             System.out.println("@@@"+request);
             Usuario usuario=new Usuario();
+            //usuario.setId(Long.parseLong(request.get("Id_usu").toString()));
             usuario.setNombre(request.get("Nombre_usu").toString());
             usuario.setApellido(request.get("Apellido_uso").toString());
-            usuario.setEdad(Integer.parseInt(request.get("Edad").toString()));
+            usuario.setEdad(request.get("Edad").hashCode());
             usuario.setDireccion(request.get("Direccion_usu").toString());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate fechaUsu = LocalDate.parse(request.get("Fecha_usu").toString(), formatter);
             usuario.setFecha_usu(fechaUsu);
-            usuario.setTelefono(Integer.parseInt(request.get("Telefono_usu").toString()));
+            usuario.setTelefono(request.get("Telefono_usu").hashCode());
+
             usuario.setCoreo(request.get("Correo_usu").toString());
             usuario.setPasswaord(request.get("Password_usu").toString());
             usuario.setPrimerI(request.get("Primer_idioma").toString());
             usuario.setSegundoI(request.get("Segundo_idioma").toString());
-            usuario.setGenero(request.get("Genero_usu").toString());
+           usuario.setGenero(request.get("Genero_usu").toString());
 
             this.usuarioImp.create(usuario);
 
             response.put("status", "success");
             response.put("data", "Registro Exitoso");
-        } catch (Exception e) {
+
+        }catch (Exception e)
+        {
             response.put("status", HttpStatus.BAD_GATEWAY);
             response.put("data", e.getMessage());
             return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
     @GetMapping("all")
@@ -113,7 +119,7 @@ public class UsuarioController {
                 usuario.setApellido(request.get("Apellido_uso").toString());
             }
             if (request.containsKey("Edad")) {
-                usuario.setEdad(Integer.parseInt(request.get("Edad").toString()));
+                usuario.setEdad(request.get("Edad").hashCode());
             }
             if (request.containsKey("Direccion_usu")) {
                 usuario.setDireccion(request.get("Direccion_usu").toString());
@@ -124,7 +130,8 @@ public class UsuarioController {
                 usuario.setFecha_usu(fechaUsu);
             }
             if (request.containsKey("Telefono_usu")) {
-                usuario.setTelefono(Integer.parseInt(request.get("Telefono_usu").toString()));
+                usuario.setTelefono(request.get("Telefono_usu").hashCode());
+
             }
             if (request.containsKey("Correo_usu")) {
                 usuario.setCoreo(request.get("Correo_usu").toString());
@@ -137,6 +144,9 @@ public class UsuarioController {
             }
             if (request.containsKey("Segundo_idioma")) {
                 usuario.setSegundoI(request.get("Segundo_idioma").toString());
+            }
+            if (request.containsKey("Gener_usu")){
+                usuario.setGenero(request.get("Genero_usu").toString());
             }
 
             this.usuarioImp.update(usuario);

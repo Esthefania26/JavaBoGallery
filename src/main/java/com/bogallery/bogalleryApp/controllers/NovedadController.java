@@ -31,6 +31,11 @@ public class NovedadController {
 
           this.novedadImp.create(novedad);
 
+            novedad.setDescripcionN(request.get("descripcionN").toString());
+            novedad.setEstadoN(request.get("estadoN").toString());
+
+
+
             response.put("status","success");
             response.put("data","Registro Exitoso");
         }catch (Exception e){

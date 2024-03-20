@@ -24,6 +24,8 @@ public class GuiaTuristaController {
 
             System.out.println("@@@@"+request);
             GuiaTurista guiaTurista = new GuiaTurista();
+            guiaTurista.setDescripcionGt(request.get("descripcionGt").toString());
+
 
             guiaTurista.setDescripcionGt(request.get("DescripcionGt").toString());
             this.guiaTuristaImp.create(guiaTurista);
