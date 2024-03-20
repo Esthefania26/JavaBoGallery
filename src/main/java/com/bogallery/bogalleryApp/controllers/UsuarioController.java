@@ -20,7 +20,7 @@ import java.util.Objects;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioImp usuarioImp;
+     UsuarioImp usuarioImp;
 
     public UsuarioController(UsuarioImp usuarioImp) {
         this.usuarioImp = usuarioImp;
@@ -28,9 +28,8 @@ public class UsuarioController {
     @PostMapping("create")
 
     public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request){
-Map<String,Object> response=new HashMap<>();
-        try{
-
+        Map<String,Object> response=new HashMap<>();
+        try {
             System.out.println("@@@"+request);
             Usuario usuario=new Usuario();
             usuario.setNombre(request.get("Nombre_usu").toString());
@@ -47,20 +46,16 @@ Map<String,Object> response=new HashMap<>();
             usuario.setSegundoI(request.get("Segundo_idioma").toString());
             usuario.setGenero(request.get("Genero_usu").toString());
 
-
             this.usuarioImp.create(usuario);
 
             response.put("status", "success");
             response.put("data", "Registro Exitoso");
-
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             response.put("status", HttpStatus.BAD_GATEWAY);
             response.put("data", e.getMessage());
             return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
-
     }
 
     @GetMapping("all")

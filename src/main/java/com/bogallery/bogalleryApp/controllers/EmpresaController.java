@@ -50,4 +50,61 @@ public class EmpresaController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Empresa empresa = empresaImp.findById(id);
+            if (empresa == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Empresa no encontrada");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+            empresaImp.delete(empresa);
+            response.put("status", HttpStatus.OK);
+            response.put("message", "Empresa eliminada correctamente");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("update/{id}")
+    public ResponseEntity<Map<String, Object>> update(@PathVariable Long id, @RequestBody Map<String, Object> request) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Empresa empresa = empresaImp.findById(id);
+            if (empresa == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Empresa no encontrada");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+
+            empresa.setNit(Long.parseLong(request.get("nit").toString()));
+            empresa.setNombreEm(request.get("nombreEm").toString());
+            empresa.setBarrioEm(request.get("barrioEm").toString());
+            empresa.setCorreoEm(request.get("correoEm").toString());
+            empresa.setDireccionEm(request.get("direccionEm").toString());
+            empresa.setEstadoEm(request.get("estadoEm").toString().charAt(0));
+            DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            empresa.setFecha_registroEm(LocalDateTime.parse(request.get("Fecha_registroEM").toString(), formatterFechaL));
+            empresa.setLocalidadEm(request.get("localidadEmp").toString());
+            empresa.setRazon(request.get("razon").toString());
+            empresa.setTelefono_em(request.get("telefono").hashCode());
+            empresa.setRut(request.get("rut").hashCode());
+
+            empresaImp.update(empresa);
+
+            response.put("status", HttpStatus.OK);
+            response.put("message", "Empresa actualizada correctamente");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
 }

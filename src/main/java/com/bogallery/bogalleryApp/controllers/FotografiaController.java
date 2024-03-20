@@ -47,13 +47,15 @@ public class FotografiaController {
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();
         try {
-            Fotografia fotografia = this.fotografiaImp.findById(id);
-
+            Fotografia fotografia = fotografiaImp.findById(id);
+            if (fotografia == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Fotografía no encontrada");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
             fotografiaImp.delete(fotografia);
-
-
-            response.put("status", "success");
-            response.put("message", "La fotografia se eliminado correctamente");
+            response.put("status", HttpStatus.OK);
+            response.put("message", "Fotografía eliminada correctamente");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             response.put("status", HttpStatus.BAD_REQUEST);
@@ -66,23 +68,21 @@ public class FotografiaController {
     public ResponseEntity<Map<String, Object>> update(@PathVariable Long id, @RequestBody Map<String, Object> request) {
         Map<String, Object> response = new HashMap<>();
         try {
-            Fotografia fotografia = this.fotografiaImp.findById(id);
-
+            Fotografia fotografia = fotografiaImp.findById(id);
             if (fotografia == null) {
                 response.put("status", HttpStatus.NOT_FOUND);
                 response.put("error", "Fotografía no encontrada");
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
-
-           if (request.containsKey("DescripcionF")) {
+            if (request.containsKey("DescripcionF")) {
                 fotografia.setDescripcionF(request.get("DescripcionF").toString());
             }
+            // Aquí puedes agregar más campos para actualizar según tu necesidad
 
-            this.fotografiaImp.update(fotografia);
+            fotografiaImp.update(fotografia);
 
-            response.put("status", "success");
-            response.put("data", "Fotografía actualizada correctamente");
-
+            response.put("status", HttpStatus.OK);
+            response.put("message", "Fotografía actualizada correctamente");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             response.put("status", HttpStatus.BAD_REQUEST);
