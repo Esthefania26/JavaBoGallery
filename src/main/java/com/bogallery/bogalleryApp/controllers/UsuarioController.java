@@ -20,7 +20,7 @@ import java.util.Objects;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioImp usuarioImp;
+    UsuarioImp usuarioImp;
 
     public UsuarioController(UsuarioImp usuarioImp) {
         this.usuarioImp = usuarioImp;
@@ -29,12 +29,14 @@ public class UsuarioController {
 
     public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request){
 Map<String,Object> response=new HashMap<>();
+
+
         try{
 
             System.out.println("@@@"+request);
             Usuario usuario=new Usuario();
             usuario.setNombre(request.get("Nombre_usu").toString());
-            usuario.setApellido(request.get("Apellido_uso").toString());
+            usuario.setApellido(request.get("Apellido_usu").toString());
             usuario.setEdad(Integer.parseInt(request.get("Edad").toString()));
             usuario.setDireccion(request.get("Direccion_usu").toString());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
