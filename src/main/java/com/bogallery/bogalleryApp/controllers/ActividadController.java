@@ -28,7 +28,6 @@ public class ActividadController {
         try {
             System.out.println("@@@" + request);
             Actividad actividad = new Actividad();
-          //actividad.setId(Long.parseLong(request.get("Id_actividades").toString()));
             actividad.setNombreACT(request.get("NombreACT").toString());
             actividad.setDescripcionACT(request.get("DescripcionACT").toString());
             DateTimeFormatter formatterFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

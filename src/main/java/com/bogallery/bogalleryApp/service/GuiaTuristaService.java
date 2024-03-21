@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface GuiaTuristaService {
     public List<GuiaTurista> findAll() throws Exception;
 
-    public GuiaTurista findById(int id);
+    public GuiaTurista findById(Long id);
 
     public void create(GuiaTurista guiaTurista);
     public void update(GuiaTurista guiaTurista);

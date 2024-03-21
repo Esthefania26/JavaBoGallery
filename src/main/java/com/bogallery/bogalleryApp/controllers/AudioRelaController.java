@@ -31,11 +31,8 @@ public class AudioRelaController {
             audio_relato.setNombreAR(request.get("NombreAR").toString());
             audio_relato.setDescripcionAR(request.get("DescripcionAR").toString());
             audio_relato.setUrlAR(request.get("URL_AR").toString());
-
             DateTimeFormatter formatterFechaAR = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             audio_relato.setFechaPublicacionAR(LocalDateTime.parse(request.get("Fecha_publicacionAR").toString(), formatterFechaAR));
-
-
             audio_relato.setCalificacion(Integer.parseInt(request.get("Calificacion").toString()));
 
             response.put("status", "succes");

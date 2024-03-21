@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Fotografia {
     @Id
-    @Column( name = "Id_fotogradia", length = 11, nullable = false)
+    @Column( name = "Id_fotografia", length = 11, nullable = false)
     private Long id;
 
     @Column(name = "DescripcionF", columnDefinition = "TEXT", nullable = false)

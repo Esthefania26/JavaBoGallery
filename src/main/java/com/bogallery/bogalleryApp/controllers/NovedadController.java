@@ -26,6 +26,14 @@ public class NovedadController {
         try {
             System.out.println("@@@@"+request);
             Novedad novedad = new Novedad();
+            novedad.setDescripcionN(request.get("DescripcionN").toString());
+            novedad.setEstadoN(request.get("EstadoN").toString());
+
+          this.novedadImp.create(novedad);
+
+            novedad.setDescripcionN(request.get("descripcionN").toString());
+            novedad.setEstadoN(request.get("estadoN").toString());
+
 
             novedad.setDescripcionN(request.get("descripcionN").toString());
             novedad.setEstadoN(request.get("estadoN").toString());
@@ -41,4 +49,55 @@ public class NovedadController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Novedad novedad = novedadImp.findById(id);
+            if (novedad == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Novedad no encontrada");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+            novedadImp.delete(novedad);
+            response.put("status", HttpStatus.OK);
+            response.put("message", "Novedad eliminada correctamente");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("update/{id}")
+    public ResponseEntity<Map<String, Object>> update(@PathVariable Long id, @RequestBody Map<String, Object> request) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Novedad novedad = novedadImp.findById(id);
+            if (novedad == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Novedad no encontrada");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+            if (request.containsKey("DescripcionN")) {
+                novedad.setDescripcionN(request.get("DescripcionN").toString());
+            }
+            if (request.containsKey("EstadoN")) {
+                novedad.setEstadoN(request.get("EstadoN").toString());
+            }
+
+
+            novedadImp.update(novedad);
+
+            response.put("status", HttpStatus.OK);
+            response.put("message", "Novedad actualizada correctamente");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

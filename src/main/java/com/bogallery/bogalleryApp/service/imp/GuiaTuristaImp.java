@@ -22,9 +22,7 @@ public class GuiaTuristaImp implements GuiaTuristaService {
     }
 
     @Override
-    public GuiaTurista findById(int id){
-        return this.guiaTuristaRepository.findById(id);
-    }
+    public GuiaTurista findById(Long id){ return this.guiaTuristaRepository.findById(id).orElse(null); }
     @Override
 
     public void create(GuiaTurista guiaTurista){

@@ -19,8 +19,9 @@ public class Inscripcion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "Id_inscripcion", length =  11, nullable = false)
     private Long Id;
-    @Column(name = "Fecha_insc", columnDefinition = "DATETIME", nullable = false)
-    private LocalDateTime fechaInsc;
+    @Column(name = "fecha_insc", columnDefinition = "DATETIME", nullable = false)
+    private LocalDate fecha_insc;
+
     @Column (name = "Cantidad_personas", length = 3, nullable = false)
     private int cantidad_personas;
 

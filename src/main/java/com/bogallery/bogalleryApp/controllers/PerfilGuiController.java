@@ -39,12 +39,14 @@ public class PerfilGuiController {
 
             perfilGuia.setTelefonoG(Integer.parseInt(request.get("TelefonoG").toString()));
 
-            //perfilGuia.setCertificado(request.get("Certificado").getBytes());
+            if(request.containsKey("Certificado") && request.get("Certificado") !=null){
+                perfilGuia.setCertificado(request.get("Certificado").toString().getBytes());
+            }
 
             perfilGuia.setLenguaSena(Boolean.parseBoolean(request.get("Lengua_sena").toString()));
+            perfilGuia.setGenero(request.get("GeneroG").toString());
 
-           /* GeneroGEnumType generoG = GeneroGEnumType.valueOf(request.get("GeneroG").toString());
-            perfilGuia.setGeneroG(generoG);*/
+
 
             this.perfilGuiImp.create(perfilGuia);
             response.put("status", "succes");
@@ -62,12 +64,15 @@ public class PerfilGuiController {
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();
         try {
-            PerfilGuia perfilGuia = this.perfilGuiImp.findById(id);
-
-
+            PerfilGuia perfilGuia = perfilGuiImp.findById(id);
+            if (perfilGuia == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Perfil de guía no encontrado");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
             perfilGuiImp.delete(perfilGuia);
-            response.put("status", "success");
-            response.put("message", "Usuario eliminado correctamente");
+            response.put("status", HttpStatus.OK);
+            response.put("message", "Perfil de guía eliminado correctamente");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             response.put("status", HttpStatus.BAD_REQUEST);
@@ -80,14 +85,12 @@ public class PerfilGuiController {
     public ResponseEntity<Map<String, Object>> update(@PathVariable Long id, @RequestBody Map<String, Object> request) {
         Map<String, Object> response = new HashMap<>();
         try {
-            PerfilGuia perfilGuia = this.perfilGuiImp.findById(id);
-
+            PerfilGuia perfilGuia = perfilGuiImp.findById(id);
             if (perfilGuia == null) {
                 response.put("status", HttpStatus.NOT_FOUND);
-                response.put("error", "PerfilGuia no encontrado");
+                response.put("error", "Perfil de guía no encontrado");
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
-
             if (request.containsKey("NombreG")) {
                 perfilGuia.setNombreG(request.get("NombreG").toString());
             }
@@ -109,12 +112,21 @@ public class PerfilGuiController {
             if (request.containsKey("TelefonoG")) {
                 perfilGuia.setTelefonoG(Integer.parseInt(request.get("TelefonoG").toString()));
             }
+            if (request.containsKey("Certificado") && request.get("Certificado") != null) {
+                perfilGuia.setCertificado(request.get("Certificado").toString().getBytes());
+            }
+            if (request.containsKey("Lengua_sena")) {
+                perfilGuia.setLenguaSena(Boolean.parseBoolean(request.get("Lengua_sena").toString()));
+            }
+            if (request.containsKey("GeneroG")) {
+                perfilGuia.setGenero(request.get("GeneroG").toString());
+            }
+            // Puedes agregar más campos para actualizar según sea necesario
 
-            this.perfilGuiImp.update(perfilGuia);
+            perfilGuiImp.update(perfilGuia);
 
-            response.put("status", "success");
-            response.put("data", "Perfil de Guía actualizado correctamente");
-
+            response.put("status", HttpStatus.OK);
+            response.put("message", "Perfil de guía actualizado correctamente");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             response.put("status", HttpStatus.BAD_REQUEST);

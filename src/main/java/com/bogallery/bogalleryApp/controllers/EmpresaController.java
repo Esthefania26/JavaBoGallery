@@ -28,7 +28,7 @@ empresa.setNombreEm(request.get("nombreEm").toString());
 empresa.setBarrioEm(request.get("barrioEm").toString());
 empresa.setCorreoEm(request.get("correoEm").toString());
 empresa.setDireccionEm(request.get("direccionEm").toString());
-//empresa.setNit(request.get("nit").hashCode());
+empresa.setNit(Long.parseLong(request.get("nit").toString()));
 //empresa.setEstadoEm(request.get("estadoEm").toString());
 //empresa.setFecha_registroEm(request.get("fechaRegistro").hashCode());
 empresa.setLocalidadEm(request.get("localidadEmp").toString());
