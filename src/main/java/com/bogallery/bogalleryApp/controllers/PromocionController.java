@@ -35,8 +35,6 @@ public class PromocionController {
             promocion.setFechainiciopro(LocalDateTime.parse(request.get("Fechainiciopro").toString(), formatterFechaL));
             promocion.setFechafinpro(LocalDateTime.parse(request.get("Fechafinpro").toString(), formatterFechaL));
 
-
-
             response.put("status","success");
             response.put("data","Registro Exitoso");
         }catch (Exception e){

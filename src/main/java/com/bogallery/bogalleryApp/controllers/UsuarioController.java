@@ -20,15 +20,15 @@ import java.util.Objects;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioImp usuarioImp;
+    UsuarioImp usuarioImp;
 
     public UsuarioController(UsuarioImp usuarioImp) {
         this.usuarioImp = usuarioImp;
     }
     @PostMapping("create")
 
-    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Objects> request){
-Map<String,Object> response=new HashMap<>();
+    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request){
+        Map<String,Object> response=new HashMap<>();
         try{
 
             System.out.println("@@@"+request);
@@ -36,20 +36,18 @@ Map<String,Object> response=new HashMap<>();
             //usuario.setId(Long.parseLong(request.get("Id_usu").toString()));
             usuario.setNombre(request.get("Nombre_usu").toString());
             usuario.setApellido(request.get("Apellido_uso").toString());
-            usuario.setEdad(Integer.parseInt(request.get("Edad").toString()));
+            usuario.setEdad(request.get("Edad").hashCode());
             usuario.setDireccion(request.get("Direccion_usu").toString());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate fechaUsu = LocalDate.parse(request.get("Fecha_usu").toString(), formatter);
             usuario.setFecha_usu(fechaUsu);
+            usuario.setTelefono(request.get("Telefono_usu").hashCode());
 
-            // usuario.setFecha_usu(LocalDate.parse(request.get("Fecha_usu").toString()));
-          usuario.setTelefono(Integer.parseInt(request.get("Telefono_usu").toString()));
             usuario.setCoreo(request.get("Correo_usu").toString());
             usuario.setPasswaord(request.get("Password_usu").toString());
             usuario.setPrimerI(request.get("Primer_idioma").toString());
             usuario.setSegundoI(request.get("Segundo_idioma").toString());
-           // GeneroEnum generoEnum = GeneroEnum.fromString(request.get("Genero_usu").toString());
-           // usuario.setGenero(generoEnum);
+            usuario.setGenero(request.get("Genero_usu").toString());
 
             this.usuarioImp.create(usuario);
 
@@ -68,7 +66,7 @@ Map<String,Object> response=new HashMap<>();
 
     @GetMapping("all")
     public ResponseEntity<Map<String, Object>> findAll(){
-    Map<String,Object> response=new HashMap<>();
+        Map<String,Object> response=new HashMap<>();
 
 
         try {
@@ -88,7 +86,7 @@ Map<String,Object> response=new HashMap<>();
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();
         try {
-           Usuario usuario = this.usuarioImp.findById(id);
+            Usuario usuario = this.usuarioImp.findById(id);
 
             usuarioImp.delete(usuario);
             response.put("status", "success");
@@ -121,7 +119,7 @@ Map<String,Object> response=new HashMap<>();
                 usuario.setApellido(request.get("Apellido_uso").toString());
             }
             if (request.containsKey("Edad")) {
-                usuario.setEdad(Integer.parseInt(request.get("Edad").toString()));
+                usuario.setEdad(request.get("Edad").hashCode());
             }
             if (request.containsKey("Direccion_usu")) {
                 usuario.setDireccion(request.get("Direccion_usu").toString());
@@ -132,7 +130,8 @@ Map<String,Object> response=new HashMap<>();
                 usuario.setFecha_usu(fechaUsu);
             }
             if (request.containsKey("Telefono_usu")) {
-                usuario.setTelefono(Integer.parseInt(request.get("Telefono_usu").toString()));
+                usuario.setTelefono(request.get("Telefono_usu").hashCode());
+
             }
             if (request.containsKey("Correo_usu")) {
                 usuario.setCoreo(request.get("Correo_usu").toString());
@@ -145,6 +144,9 @@ Map<String,Object> response=new HashMap<>();
             }
             if (request.containsKey("Segundo_idioma")) {
                 usuario.setSegundoI(request.get("Segundo_idioma").toString());
+            }
+            if (request.containsKey("Gener_usu")){
+                usuario.setGenero(request.get("Genero_usu").toString());
             }
 
             this.usuarioImp.update(usuario);
