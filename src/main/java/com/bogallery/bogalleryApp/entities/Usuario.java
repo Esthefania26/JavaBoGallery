@@ -63,7 +63,7 @@ public class Usuario {
     private List<Rol> rol;
 
 
-//un usuario puede registrar muchos lugares
+    //un usuario puede registrar muchos lugares
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade =  CascadeType.ALL)
     private List<Lugar> lugar;
 }
