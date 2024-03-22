@@ -24,7 +24,7 @@ public class Usuario {
 
     @Column (name = "Nombre_usu", length = 30, nullable = false)
     private String nombre;
-    @Column (name = "Apellido_usu", length = 30, nullable = false)
+    @Column (name = "Apellido_uso", length = 30, nullable = false)
     private String apellido;
     @Column (name = "Edad", length = 2, nullable = false)
     private int edad;
