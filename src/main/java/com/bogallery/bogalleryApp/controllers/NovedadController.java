@@ -31,6 +31,14 @@ public class NovedadController {
 
           this.novedadImp.create(novedad);
 
+            novedad.setDescripcionN(request.get("descripcionN").toString());
+            novedad.setEstadoN(request.get("estadoN").toString());
+
+
+            novedad.setDescripcionN(request.get("descripcionN").toString());
+            novedad.setEstadoN(request.get("estadoN").toString());
+
+
             response.put("status","success");
             response.put("data","Registro Exitoso");
         }catch (Exception e){
@@ -45,9 +53,14 @@ public class NovedadController {
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();
         try {
-            Novedad novedad = this.novedadImp.findById(id);
+            Novedad novedad = novedadImp.findById(id);
+            if (novedad == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Novedad no encontrada");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
             novedadImp.delete(novedad);
-            response.put("status", "success");
+            response.put("status", HttpStatus.OK);
             response.put("message", "Novedad eliminada correctamente");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
@@ -61,7 +74,7 @@ public class NovedadController {
     public ResponseEntity<Map<String, Object>> update(@PathVariable Long id, @RequestBody Map<String, Object> request) {
         Map<String, Object> response = new HashMap<>();
         try {
-            Novedad novedad = this.novedadImp.findById(id);
+            Novedad novedad = novedadImp.findById(id);
             if (novedad == null) {
                 response.put("status", HttpStatus.NOT_FOUND);
                 response.put("error", "Novedad no encontrada");
@@ -73,9 +86,12 @@ public class NovedadController {
             if (request.containsKey("EstadoN")) {
                 novedad.setEstadoN(request.get("EstadoN").toString());
             }
-            this.novedadImp.update(novedad);
-            response.put("status", "success");
-            response.put("data", "Novedad actualizada correctamente");
+
+
+            novedadImp.update(novedad);
+
+            response.put("status", HttpStatus.OK);
+            response.put("message", "Novedad actualizada correctamente");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             response.put("status", HttpStatus.BAD_REQUEST);
@@ -83,4 +99,5 @@ public class NovedadController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
+
 }

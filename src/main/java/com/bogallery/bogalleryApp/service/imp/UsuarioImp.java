@@ -13,7 +13,6 @@ import java.util.Optional;
 public class UsuarioImp implements UsuarioService {
 
     @Autowired
-
     private UsuarioRepository usuarioRepository;
 
     @Override
@@ -27,10 +26,8 @@ public class UsuarioImp implements UsuarioService {
     }
 
     @Override
-
-    public  void create(Usuario usuario)
-    {
-        this.usuarioRepository.save(usuario);
+    public  void create(Usuario usuario) {
+    this.usuarioRepository.save(usuario);
     }
 
     @Override
