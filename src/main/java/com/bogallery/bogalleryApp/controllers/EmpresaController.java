@@ -24,17 +24,17 @@ public class EmpresaController {
         try {
             System.out.println("@@@@"+request);
             Empresa empresa = new Empresa();
-empresa.setNombreEm(request.get("nombreEm").toString());
-empresa.setBarrioEm(request.get("barrioEm").toString());
-empresa.setCorreoEm(request.get("correoEm").toString());
-empresa.setDireccionEm(request.get("direccionEm").toString());
-empresa.setNit(Long.parseLong(request.get("nit").toString()));
-//empresa.setEstadoEm(request.get("estadoEm").toString());
-//empresa.setFecha_registroEm(request.get("fechaRegistro").hashCode());
-empresa.setLocalidadEm(request.get("localidadEmp").toString());
-empresa.setRazon(request.get("razon").toString());
-empresa.setTelefono_em(request.get("telefono").hashCode());
-empresa.setRut(request.get("rut").hashCode());
+            empresa.setNombreEm(request.get("nombreEm").toString());
+            empresa.setBarrioEm(request.get("barrioEm").toString());
+            empresa.setCorreoEm(request.get("correoEm").toString());
+            empresa.setDireccionEm(request.get("direccionEm").toString());
+            empresa.setNit(Long.parseLong(request.get("nit").toString()));
+            //empresa.setEstadoEm(request.get("estadoEm").toString());
+            //empresa.setFecha_registroEm(request.get("fechaRegistro").hashCode());
+            empresa.setLocalidadEm(request.get("localidadEmp").toString());
+            empresa.setRazon(request.get("razon").toString());
+            empresa.setTelefono_em(request.get("telefono").hashCode());
+            empresa.setRut(request.get("rut").hashCode());
 
             response.put("status","success");
             response.put("data","Registro Exitoso");

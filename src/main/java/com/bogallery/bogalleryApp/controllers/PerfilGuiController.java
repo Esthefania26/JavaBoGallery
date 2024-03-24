@@ -23,7 +23,7 @@ public class PerfilGuiController {
         Map<String, Object> response = new HashMap<>();
         try {
             System.out.println("@@@" + request);
-            PerfilGuia perfilGuia=new PerfilGuia();
+            PerfilGuia perfilGuia =new PerfilGuia();
 
             perfilGuia.setNombreG(request.get("NombreG").toString());
 
@@ -38,6 +38,7 @@ public class PerfilGuiController {
             perfilGuia.setSegundoI(request.get("Segundo_idioma").toString());
 
             perfilGuia.setTelefonoG(Integer.parseInt(request.get("TelefonoG").toString()));
+            perfilGuia.setLenguaSena(Boolean.parseBoolean(request.get("Lengua_sena").toString()));
 
             if(request.containsKey("Certificado") && request.get("Certificado") !=null){
                 perfilGuia.setCertificado(request.get("Certificado").toString().getBytes());

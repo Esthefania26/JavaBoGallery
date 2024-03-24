@@ -19,7 +19,7 @@ public class Fotografia {
     @Column(name = "DescripcionF", columnDefinition = "TEXT", nullable = false)
     private String descripcionF;
 
-    @Column(name = "Fotografia", nullable = false)
+    @Column(name = "Fotografia", nullable = true)
     private byte[] fotografia;
 
     @ManyToOne(fetch = FetchType.LAZY)

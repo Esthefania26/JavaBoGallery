@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -32,12 +33,8 @@ public class ActividadController {
             actividad.setDescripcionACT(request.get("DescripcionACT").toString());
             DateTimeFormatter formatterFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             actividad.setFechaInicioACT(LocalDateTime.parse(request.get("Fecha_inicioACT").toString(), formatterFecha));
-
             actividad.setFechaFinACT(LocalDateTime.parse(request.get("Fecha_finACT").toString(), formatterFecha));
-
-           // JornadaEnum jornada = JornadaEnum.valueOf(request.get("Jornada").toString());
-            //actividad.setJornada(jornada);
-
+            actividad.setJornada(request.get("Jordana").toString());
             actividad.setValor(Integer.parseInt(request.get("Valor").toString()));
 
             actividad.setUrlACT(request.get("URL_ACT").toString());
@@ -54,6 +51,21 @@ public class ActividadController {
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+    @GetMapping("all")
+    public ResponseEntity<Map<String, Object>> findAll() {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            List<Actividad> actividadList = this.actividadImp.findAll();
+            response.put("status", "success");
+            response.put("data", actividadList);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_GATEWAY);
+            response.put("data", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
+        }
+    }
+
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();
