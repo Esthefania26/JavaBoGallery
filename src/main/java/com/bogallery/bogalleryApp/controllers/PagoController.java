@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path = "/api/pago/")
+@RequestMapping(path = "/api/pago/", method = {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT, RequestMethod.HEAD})
 @CrossOrigin("*")
 public class PagoController {
     @Autowired
