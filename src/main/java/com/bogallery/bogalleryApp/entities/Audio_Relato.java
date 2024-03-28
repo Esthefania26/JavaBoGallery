@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Audio_Relato {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column( name = "Id_AudioR", length = 11, nullable = false)
     private Long id;
 

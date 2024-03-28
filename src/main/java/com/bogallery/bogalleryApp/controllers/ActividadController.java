@@ -1,7 +1,9 @@
 package com.bogallery.bogalleryApp.controllers;
 
 import com.bogallery.bogalleryApp.entities.Actividad;
+import com.bogallery.bogalleryApp.entities.Lugar;
 import com.bogallery.bogalleryApp.service.imp.ActividadImp;
+import com.bogallery.bogalleryApp.service.imp.LugarImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,9 @@ public class ActividadController {
     @Autowired
     ActividadImp actividadImp;
 
+    @Autowired
+    private LugarImp lugarImp;
+
 
     @PostMapping("create")
 
@@ -36,8 +41,9 @@ public class ActividadController {
             actividad.setFechaFinACT(LocalDateTime.parse(request.get("Fecha_finACT").toString(), formatterFecha));
             actividad.setJornada(request.get("Jordana").toString());
             actividad.setValor(Integer.parseInt(request.get("Valor").toString()));
-
             actividad.setUrlACT(request.get("URL_ACT").toString());
+            Lugar lugar = lugarImp.findById(Long.parseLong(request.get("Id_lugar").toString()));
+            actividad.setLugar(lugar);
             this.actividadImp.create(actividad);
 
 
@@ -63,6 +69,28 @@ public class ActividadController {
             response.put("status", HttpStatus.BAD_GATEWAY);
             response.put("data", e.getMessage());
             return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
+        }
+    }
+    @GetMapping("{id}")
+    public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Actividad actividad = this.actividadImp.findById(id);
+
+            if (actividad == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Actividad no encontrada");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+
+            response.put("status", "success");
+            response.put("data", actividad);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
 

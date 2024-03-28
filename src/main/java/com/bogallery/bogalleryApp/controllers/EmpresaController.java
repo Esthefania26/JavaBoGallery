@@ -1,6 +1,7 @@
 package com.bogallery.bogalleryApp.controllers;
 import com.bogallery.bogalleryApp.entities.Empresa;
 import com.bogallery.bogalleryApp.service.imp.EmpresaImp;
+import com.bogallery.bogalleryApp.service.imp.RolImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,9 @@ public class EmpresaController {
 
     @Autowired
     EmpresaImp empresaImp;
+
+    @Autowired
+    private RolImp rolImp;
 
     @PostMapping("create")
     public ResponseEntity<Map<String,Object>> create(@RequestBody Map<String,Object> request){

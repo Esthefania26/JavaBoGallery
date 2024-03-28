@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Fotografia {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column( name = "Id_fotografia", length = 11, nullable = false)
     private Long id;
 
@@ -23,7 +24,7 @@ public class Fotografia {
     private byte[] fotografia;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_lugar", nullable = false)
+    @JoinColumn(name = "Id_lugar", nullable = false)
     private  Lugar lugar;
 
 }

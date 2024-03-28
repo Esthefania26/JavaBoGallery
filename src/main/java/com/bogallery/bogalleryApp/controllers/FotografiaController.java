@@ -1,7 +1,9 @@
 package com.bogallery.bogalleryApp.controllers;
 
 import com.bogallery.bogalleryApp.entities.Fotografia;
+import com.bogallery.bogalleryApp.entities.Lugar;
 import com.bogallery.bogalleryApp.service.imp.FotografiaImp;
+import com.bogallery.bogalleryApp.service.imp.LugarImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +21,13 @@ public class FotografiaController {
 
     @Autowired
     FotografiaImp fotografiaImp;
+
+    @Autowired
+    private LugarImp lugarImp;
+
     @PostMapping("create")
 
-    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Objects> request) {
+    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request) {
         Map<String, Object> response = new HashMap<>();
         try {
             System.out.println("@@@" + request);
@@ -32,6 +38,11 @@ public class FotografiaController {
             if(request.containsKey("fotografia") && request.get("fotografia") !=null){
                 fotografia.setFotografia(request.get("fotografia").toString().getBytes());
             }
+
+           Lugar lugar = lugarImp.findById(Long.parseLong(request.get("Id_lugar").toString()));
+            fotografia.setLugar(lugar);
+
+
 
             this.fotografiaImp.create(fotografia);
             response.put("status", "succes");
@@ -59,6 +70,29 @@ public class FotografiaController {
             return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
         }
     }
+    @GetMapping("{id}")
+    public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Fotografia fotografia = this.fotografiaImp.findById(id);
+
+            if (fotografia == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Fotografía no encontrada");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+
+            response.put("status", "success");
+            response.put("data", fotografia);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
