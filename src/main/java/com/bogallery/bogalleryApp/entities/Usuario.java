@@ -60,6 +60,7 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "Id_rol", referencedColumnName = "Id_rol")
     )
 
+
     private List<Rol> rol;
 
 

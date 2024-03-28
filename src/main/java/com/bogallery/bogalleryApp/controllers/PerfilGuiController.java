@@ -75,6 +75,28 @@ public class PerfilGuiController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+    @GetMapping("{id}")
+    public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            PerfilGuia perfilGuia = this.perfilGuiImp.findById(id);
+
+            if (perfilGuia == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Perfil de guía no encontrado");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+
+            response.put("status", "success");
+            response.put("data", perfilGuia);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
 
 
     @DeleteMapping("delete/{id}")
