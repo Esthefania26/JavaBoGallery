@@ -25,10 +25,10 @@ public class Actividad {
     @Column(name = "DescripcionACT", columnDefinition = "TEXT", nullable = false)
     private String descripcionACT;
 
-    @Column(name = "Fecha_inicioACT", columnDefinition = "DATETIME", nullable = false)
+    @Column(name = "Fecha_inicioACT", columnDefinition = "DATETIME",nullable = false)
     private LocalDateTime fechaInicioACT;
 
-    @Column(name = "Fecha_finACT", columnDefinition = "DATETIME", nullable = false)
+    @Column(name = "Fecha_finACT", columnDefinition = "DATETIME",nullable = false)
     private LocalDateTime fechaFinACT;
 
     @Column(name = "Jornada", length = 100, nullable = false)

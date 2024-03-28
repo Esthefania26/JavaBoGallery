@@ -30,7 +30,7 @@ public class Pago {
     @Column (name = "CodidoComprobante", length = 11, nullable = false)
     private int codidoComprobante;
 
-    @Column(name = "ArchivoComprobante", nullable = false)
+    @Column(name = "ArchivoComprobante", nullable = true)
     @Lob
     private byte[] archivoComprobante;
 

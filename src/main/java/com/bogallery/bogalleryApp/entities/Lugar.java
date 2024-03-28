@@ -59,4 +59,7 @@ public class Lugar {
 //Un lugar puede tene muchas actividades
     @OneToMany(mappedBy = "lugar", cascade = CascadeType.ALL)
     private List<Actividad> actividades;
+
+    @OneToMany(mappedBy = "lugar", cascade = CascadeType.ALL)
+    private List<Plan> planes;
 }

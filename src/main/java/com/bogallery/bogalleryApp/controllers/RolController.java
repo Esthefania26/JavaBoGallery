@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -22,7 +23,7 @@ public class RolController {
     RolImp rolImp;
 
     @PostMapping("create")
-    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Objects> request) {
+    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request) {
         Map<String, Object> response = new HashMap<>();
         try {
             System.out.println("@@@" + request);
@@ -47,20 +48,35 @@ public class RolController {
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
+    @GetMapping("all")
+    public ResponseEntity<Map<String, Object>> findAll() {
         Map<String, Object> response = new HashMap<>();
         try {
-            Rol rol = rolImp.findById(id);
+            List<Rol> roles = rolImp.findAll();
+            response.put("status", "success");
+            response.put("data", roles);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
+            response.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+    @GetMapping("{id}")
+    public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Rol rol = this.rolImp.findById(id);
+
             if (rol == null) {
                 response.put("status", HttpStatus.NOT_FOUND);
                 response.put("error", "Rol no encontrado");
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
-            rolImp.delete(rol);
-            response.put("status", HttpStatus.OK);
-            response.put("message", "Rol eliminado correctamente");
+
+            response.put("status", "success");
+            response.put("data", rol);
+
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             response.put("status", HttpStatus.BAD_REQUEST);
@@ -73,7 +89,7 @@ public class RolController {
     public ResponseEntity<Map<String, Object>> update(@PathVariable Long id, @RequestBody Map<String, Object> request) {
         Map<String, Object> response = new HashMap<>();
         try {
-            Rol rol = rolImp.findById(id);
+            Rol rol = this.rolImp.findById(id);
             if (rol == null) {
                 response.put("status", HttpStatus.NOT_FOUND);
                 response.put("error", "Rol no encontrado");
@@ -105,6 +121,29 @@ public class RolController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Rol rol = rolImp.findById(id);
+            if (rol == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Rol no encontrado");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+            rolImp.delete(rol);
+            response.put("status", HttpStatus.OK);
+            response.put("message", "Rol eliminado correctamente");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 
 }
 

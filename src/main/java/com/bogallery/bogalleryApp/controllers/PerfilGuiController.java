@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -19,11 +20,11 @@ public class PerfilGuiController {
     @Autowired
     PerfilGuiImp perfilGuiImp;
     @PostMapping("create")
-    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Objects> request) {
+    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request) {
         Map<String, Object> response = new HashMap<>();
         try {
             System.out.println("@@@" + request);
-            PerfilGuia perfilGuia=new PerfilGuia();
+            PerfilGuia perfilGuia =new PerfilGuia();
 
             perfilGuia.setNombreG(request.get("NombreG").toString());
 
@@ -38,6 +39,7 @@ public class PerfilGuiController {
             perfilGuia.setSegundoI(request.get("Segundo_idioma").toString());
 
             perfilGuia.setTelefonoG(Integer.parseInt(request.get("TelefonoG").toString()));
+            perfilGuia.setLenguaSena(Boolean.parseBoolean(request.get("Lengua_sena").toString()));
 
             if(request.containsKey("Certificado") && request.get("Certificado") !=null){
                 perfilGuia.setCertificado(request.get("Certificado").toString().getBytes());
@@ -59,6 +61,43 @@ public class PerfilGuiController {
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+    @GetMapping("all")
+    public ResponseEntity<Map<String, Object>> findAll() {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            List<PerfilGuia> perfilGuiaList = perfilGuiImp.findAll();
+            response.put("status", "success");
+            response.put("data", perfilGuiaList);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
+            response.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+    @GetMapping("{id}")
+    public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            PerfilGuia perfilGuia = this.perfilGuiImp.findById(id);
+
+            if (perfilGuia == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Perfil de guía no encontrado");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+
+            response.put("status", "success");
+            response.put("data", perfilGuia);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {

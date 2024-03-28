@@ -60,10 +60,11 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "Id_rol", referencedColumnName = "Id_rol")
     )
 
+
     private List<Rol> rol;
 
 
-//un usuario puede registrar muchos lugares
+    //un usuario puede registrar muchos lugares
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade =  CascadeType.ALL)
     private List<Lugar> lugar;
 }
