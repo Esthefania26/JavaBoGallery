@@ -24,6 +24,8 @@ public class EmpresaController {
     public ResponseEntity<Map<String,Object>> create(@RequestBody Map<String,Object> request){
         Map<String,Object> response=new HashMap<>();
 
+
+
         try {
             System.out.println("@@@@"+request);
             Empresa empresa = new Empresa();
@@ -102,7 +104,7 @@ public class EmpresaController {
             empresaImp.update(empresa);
 
             response.put("status", HttpStatus.OK);
-            response.put("message", "Empresa actualizada correctamente");
+            response.put("message", "Empresa actualizada correctamentee");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             response.put("status", HttpStatus.BAD_REQUEST);
