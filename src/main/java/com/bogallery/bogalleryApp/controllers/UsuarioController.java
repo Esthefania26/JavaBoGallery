@@ -26,23 +26,20 @@ public class UsuarioController {
         this.usuarioImp = usuarioImp;
     }
     @PostMapping("create")
-
-    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request){
-        Map<String,Object> response=new HashMap<>();
-        try{
-
-            System.out.println("@@@"+request);
-            Usuario usuario=new Usuario();
+    public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            System.out.println("@@@" + request);
+            Usuario usuario = new Usuario();
             //usuario.setId(Long.parseLong(request.get("Id_usu").toString()));
             usuario.setNombre(request.get("Nombre_usu").toString());
-            usuario.setApellido(request.get("Apellido_uso").toString());
+            usuario.setApellido(request.get("Apellido_uso").toString()); // Aquí estaba el error de tipografía en "Apellido_uso"
             usuario.setEdad(request.get("Edad").hashCode());
             usuario.setDireccion(request.get("Direccion_usu").toString());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate fechaUsu = LocalDate.parse(request.get("Fecha_usu").toString(), formatter);
             usuario.setFecha_usu(fechaUsu);
             usuario.setTelefono(request.get("Telefono_usu").hashCode());
-
             usuario.setCoreo(request.get("Correo_usu").toString());
             usuario.setPasswaord(request.get("Password_usu").toString());
             usuario.setPrimerI(request.get("Primer_idioma").toString());
@@ -53,16 +50,14 @@ public class UsuarioController {
 
             response.put("status", "success");
             response.put("data", "Registro Exitoso");
-
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             response.put("status", HttpStatus.BAD_GATEWAY);
             response.put("data", e.getMessage());
             return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
-
     }
+
 
     @GetMapping("all")
     public ResponseEntity<Map<String, Object>> findAll(){
@@ -81,6 +76,30 @@ public class UsuarioController {
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Usuario usuario = this.usuarioImp.findById(id);
+
+            if (usuario == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Usuario no encontrado");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+
+            response.put("status", "success");
+            response.put("data", usuario);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {

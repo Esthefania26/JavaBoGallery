@@ -13,17 +13,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Fotografia {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column( name = "Id_fotografia", length = 11, nullable = false)
     private Long id;
 
     @Column(name = "DescripcionF", columnDefinition = "TEXT", nullable = false)
     private String descripcionF;
 
-    @Column(name = "Fotografia", nullable = false)
+    @Column(name = "Fotografia", nullable = true)
     private byte[] fotografia;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_lugar", nullable = false)
+    @JoinColumn(name = "Id_lugar", nullable = false)
     private  Lugar lugar;
 
 }

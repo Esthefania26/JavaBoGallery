@@ -60,4 +60,8 @@ public class Plan {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nit_empresa", nullable = false)
     private Empresa empresa;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_lugar", nullable = false)
+    private Lugar lugar;
 }

@@ -16,7 +16,7 @@ import java.util.List;
 public class Empresa {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Nit_empresa", length = 15, nullable = false)
     private Long nit;
 
