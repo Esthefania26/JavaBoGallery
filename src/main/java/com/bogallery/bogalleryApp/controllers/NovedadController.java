@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path = "/api/novedad/")
+@RequestMapping(path = "/api/novedad/", method = {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT, RequestMethod.HEAD})
 @CrossOrigin("*")
 public class NovedadController {
 
@@ -34,6 +34,9 @@ public class NovedadController {
             novedad.setDescripcionN(request.get("descripcionN").toString());
             novedad.setEstadoN(request.get("estadoN").toString());
 
+
+            novedad.setDescripcionN(request.get("descripcionN").toString());
+            novedad.setEstadoN(request.get("estadoN").toString());
 
 
             response.put("status","success");

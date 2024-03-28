@@ -28,7 +28,7 @@ public class UsuarioController {
     @PostMapping("create")
 
     public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request){
-Map<String,Object> response=new HashMap<>();
+        Map<String,Object> response=new HashMap<>();
         try{
 
             System.out.println("@@@"+request);
@@ -47,7 +47,7 @@ Map<String,Object> response=new HashMap<>();
             usuario.setPasswaord(request.get("Password_usu").toString());
             usuario.setPrimerI(request.get("Primer_idioma").toString());
             usuario.setSegundoI(request.get("Segundo_idioma").toString());
-           usuario.setGenero(request.get("Genero_usu").toString());
+            usuario.setGenero(request.get("Genero_usu").toString());
 
             this.usuarioImp.create(usuario);
 
@@ -66,7 +66,7 @@ Map<String,Object> response=new HashMap<>();
 
     @GetMapping("all")
     public ResponseEntity<Map<String, Object>> findAll(){
-    Map<String,Object> response=new HashMap<>();
+        Map<String,Object> response=new HashMap<>();
 
 
         try {
@@ -86,7 +86,7 @@ Map<String,Object> response=new HashMap<>();
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();
         try {
-           Usuario usuario = this.usuarioImp.findById(id);
+            Usuario usuario = this.usuarioImp.findById(id);
 
             usuarioImp.delete(usuario);
             response.put("status", "success");

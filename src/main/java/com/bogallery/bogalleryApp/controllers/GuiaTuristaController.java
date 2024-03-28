@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path = "/api/guiaTurista/")
+@RequestMapping(path = "/api/guiaTurista/", method = {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT, RequestMethod.HEAD})
 @CrossOrigin("*")
 public class GuiaTuristaController {
     @Autowired

@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path = "/api/inscripcion/")
+@RequestMapping(path = "/api/inscripcion/", method = {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT, RequestMethod.HEAD})
 @CrossOrigin("*")
 public class InscripcionController {
     @Autowired
@@ -34,6 +34,9 @@ public class InscripcionController {
 
 
             this.inscripcionImp.create(inscripcion);
+
+            inscripcion.setCantidad_personas(request.get("cantidad_personas").hashCode());
+            //inscripcion.setFechaInsc(request.get("fechaInsc").toString());
 
             inscripcion.setCantidad_personas(request.get("cantidad_personas").hashCode());
             //inscripcion.setFechaInsc(request.get("fechaInsc").toString());
