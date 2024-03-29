@@ -1,7 +1,9 @@
 package com.bogallery.bogalleryApp.controllers;
 
 
+import com.bogallery.bogalleryApp.entities.Plan;
 import com.bogallery.bogalleryApp.entities.Promocion;
+import com.bogallery.bogalleryApp.service.imp.PlanImp;
 import com.bogallery.bogalleryApp.service.imp.PromocionImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,6 +22,8 @@ import java.util.Map;
 public class PromocionController {
     @Autowired
     PromocionImp promocionImp;
+    @Autowired
+    private PlanImp planImp;
 
     @PostMapping("create")
     public ResponseEntity<Map<String,Object>> create(@RequestBody Map<String,Object> request){
@@ -35,6 +40,9 @@ public class PromocionController {
             promocion.setFechainiciopro(LocalDateTime.parse(request.get("Fechainiciopro").toString(), formatterFechaL));
             promocion.setFechafinpro(LocalDateTime.parse(request.get("Fechafinpro").toString(), formatterFechaL));
 
+            Plan plan = planImp.findById(Long.parseLong(request.get("Id_planes").toString()));
+            promocion.setPlan(plan);
+            this.promocionImp.create(promocion);
             response.put("status","success");
             response.put("data","Registro Exitoso");
         }catch (Exception e){
@@ -45,6 +53,41 @@ public class PromocionController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+    @GetMapping("all")
+    public ResponseEntity<Map<String, Object>> findAll() {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            List<Promocion> promociones = promocionImp.findAll();
+            response.put("status", "success");
+            response.put("data", promociones);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_GATEWAY);
+            response.put("data", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
+        }
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Promocion promocion = promocionImp.findById(id);
+            if (promocion == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Promoción no encontrada");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+            response.put("status", "success");
+            response.put("data", promocion);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();

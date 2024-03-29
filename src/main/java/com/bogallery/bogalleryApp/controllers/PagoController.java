@@ -2,13 +2,16 @@ package com.bogallery.bogalleryApp.controllers;
 
 
 import com.bogallery.bogalleryApp.entities.Pago;
+import com.bogallery.bogalleryApp.entities.Venta;
 import com.bogallery.bogalleryApp.service.imp.PagoImp;
+import com.bogallery.bogalleryApp.service.imp.VentaImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,6 +20,9 @@ import java.util.Map;
 public class PagoController {
     @Autowired
     PagoImp pagoImp;
+
+    @Autowired
+    VentaImp ventaImp;
 
     @PostMapping("create")
     public ResponseEntity<Map<String,Object>> create(@RequestBody Map<String,Object> request){
@@ -34,8 +40,11 @@ public class PagoController {
                 pago.setArchivoComprobante(request.get("ArchivoComprobante").toString().getBytes());
             }
 
+            Venta venta = ventaImp.findById(Long.parseLong(request.get("Id_ventas").toString()));
+            pago.setVenta(venta);
 
-this.pagoImp.create(pago);
+
+           this.pagoImp.create(pago);
 
             response.put("status","success");
             response.put("data","Registro Exitoso");
@@ -46,6 +55,41 @@ this.pagoImp.create(pago);
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("all")
+    public ResponseEntity<Map<String, Object>> findAll() {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            List<Pago> pagoList = this.pagoImp.findAll();
+            response.put("status", "success");
+            response.put("data", pagoList);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_GATEWAY);
+            response.put("data", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
+        }
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Pago pago = this.pagoImp.findById(id);
+            if (pago == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Pago no encontrado");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+            response.put("status", "success");
+            response.put("data", pago);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
     }
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {

@@ -21,7 +21,7 @@ import java.util.Objects;
 @RequestMapping(path = "/api/audiorela/", method = {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT, RequestMethod.HEAD})
 @CrossOrigin("*")
 public class AudioRelaController {
-
+////
     @Autowired
     AudioRelaImp audioRelaImp;
 
@@ -40,9 +40,10 @@ public class AudioRelaController {
             DateTimeFormatter formatterFechaAR = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             audio_relato.setFechaPublicacionAR(LocalDateTime.parse(request.get("Fecha_publicacionAR").toString(), formatterFechaAR));
             audio_relato.setCalificacion(Integer.parseInt(request.get("Calificacion").toString()));
-
+////
             Lugar lugar = lugarImp.findById(Long.parseLong(request.get("Id_lugar").toString()));
             audio_relato.setLugar(lugar);
+            ///
             this.audioRelaImp.create(audio_relato);
 
             response.put("status", "succes");

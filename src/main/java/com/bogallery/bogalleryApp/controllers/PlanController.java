@@ -1,6 +1,12 @@
 package com.bogallery.bogalleryApp.controllers;
 
+import com.bogallery.bogalleryApp.entities.Categoria;
+import com.bogallery.bogalleryApp.entities.Empresa;
+import com.bogallery.bogalleryApp.entities.Lugar;
 import com.bogallery.bogalleryApp.entities.Plan;
+import com.bogallery.bogalleryApp.service.imp.CategoriaImp;
+import com.bogallery.bogalleryApp.service.imp.EmpresaImp;
+import com.bogallery.bogalleryApp.service.imp.LugarImp;
 import com.bogallery.bogalleryApp.service.imp.PlanImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -20,6 +27,15 @@ import java.util.Objects;
 public class PlanController {
 @Autowired
     PlanImp planImp;
+
+    @Autowired
+    private LugarImp lugarImp;
+
+    @Autowired
+    private EmpresaImp empresaImp;
+
+    @Autowired
+    private CategoriaImp categoriaImp;
     @PostMapping("create")
     public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String,Object>request){
         Map<String,Object> response=new HashMap<>();
@@ -36,6 +52,15 @@ public class PlanController {
             plan.setFechaP(LocalDateTime.parse(request.get("FechaP").toString(), formatterFechaL));
             plan.setFechafinalP(LocalDateTime.parse(request.get("FechafinalP").toString(), formatterFechaL));
 
+            Lugar lugar = lugarImp.findById(Long.parseLong(request.get("Id_lugar").toString()));
+            plan.setLugar(lugar);
+
+            Empresa empresa = empresaImp.findById(Long.parseLong(request.get("Nit_empresa").toString()));
+            plan.setEmpresa(empresa);
+
+            Categoria categoria = categoriaImp.findById(Long.parseLong(request.get("Id_categorias").toString()));
+            plan.setCategoria(categoria);
+
             this.planImp.create(plan);
             response.put("status","succes");
             response.put("data", "Registro Existoso");
@@ -47,6 +72,41 @@ public class PlanController {
 
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("all")
+    public ResponseEntity<Map<String, Object>> findAll() {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            List<Plan> planList = this.planImp.findAll();
+            response.put("status", "success");
+            response.put("data", planList);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_GATEWAY);
+            response.put("data", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
+        }
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Plan plan = this.planImp.findById(id);
+            if (plan == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Plan no encontrado");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+            response.put("status", "success");
+            response.put("data", plan);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
     }
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {

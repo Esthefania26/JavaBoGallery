@@ -1,7 +1,9 @@
 package com.bogallery.bogalleryApp.controllers;
 
 
+import com.bogallery.bogalleryApp.entities.Inscripcion;
 import com.bogallery.bogalleryApp.entities.Venta;
+import com.bogallery.bogalleryApp.service.imp.InscripcionImp;
 import com.bogallery.bogalleryApp.service.imp.VentaImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,6 +22,8 @@ import java.util.Map;
 public class VentaController {
     @Autowired
     VentaImp ventaImp;
+
+    InscripcionImp inscripcionImp;
     @PostMapping("create")
     public ResponseEntity<Map<String,Object>> create(@RequestBody Map<String,Object> request){
         Map<String,Object> response=new HashMap<>();
@@ -31,6 +36,10 @@ public class VentaController {
             DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según tus necesidades
             venta.setFecha_venta(LocalDateTime.parse(request.get("Fecha_venta").toString(), formatterFechaL));
 
+            Inscripcion inscripcion = inscripcionImp.findById(Long.parseLong(request.get("Id_inscripcion").toString()));
+            venta.setInscripciones(inscripcion);
+
+            this.ventaImp.create(venta);
             response.put("status","success");
             response.put("data","Registro Exitoso");
         }catch (Exception e){
@@ -56,7 +65,40 @@ public class VentaController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping("all")
+    public ResponseEntity<Map<String, Object>> findAll() {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            List<Venta> ventas = ventaImp.findAll();
+            response.put("status", "success");
+            response.put("data", ventas);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_GATEWAY);
+            response.put("data", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_GATEWAY);
+        }
+    }
 
+    @GetMapping("{id}")
+    public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Venta venta = ventaImp.findById(id);
+            if (venta == null) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("error", "Venta no encontrada");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+            response.put("status", "success");
+            response.put("data", venta);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("status", HttpStatus.BAD_REQUEST);
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
     @PutMapping("update/{id}")
     public ResponseEntity<Map<String, Object>> update(@PathVariable Long id, @RequestBody Map<String, Object> request) {
         Map<String, Object> response = new HashMap<>();
