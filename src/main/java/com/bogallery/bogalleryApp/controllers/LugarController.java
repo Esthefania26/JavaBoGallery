@@ -33,15 +33,13 @@ public class LugarController {
         try {
             System.out.println("@@@" + request);
             Lugar lugar=new Lugar();
-            lugar.setNombreL(request.get("NombreL").toString());
-            lugar.setLocalidadL(request.get("LocalidadL").toString());
-            lugar.setBarrioL(request.get("BarrioL").toString());
-            lugar.setDireccionL(request.get("DireccionL").toString());
-            lugar.setTipoL(request.get("TipoL").toString());
-            lugar.setDescripcionL(request.get("DescripcionL").toString());
-
-            DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según tus necesidades
-            lugar.setFechanPL(LocalDate.parse(request.get("Fecha_PublicacionL").toString(), formatterFechaL));
+            lugar.setNombreL(request.get("nombreL").toString());
+            lugar.setLocalidadL(request.get("localidadL").toString());
+            lugar.setBarrioL(request.get("barrioL").toString());
+            lugar.setDireccionL(request.get("direccionL").toString());
+            lugar.setTipoL(request.get("tipoL").toString());
+            lugar.setDescripcionL(request.get("descripcionL").toString());
+            lugar.setFecha_PublicacionL(LocalDate.parse(request.get("fecha_PublicacionL").toString()));
             Usuario usuario = usuarioImp.findById(Long.parseLong(request.get("Id_usu").toString()));
             lugar.setUsuario(usuario);
             this.lugarImp.create(lugar);
@@ -124,27 +122,26 @@ public class LugarController {
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
 
-           if (request.containsKey("NombreL")) {
-                lugar.setNombreL(request.get("NombreL").toString());
+           if (request.containsKey("nombreL")) {
+                lugar.setNombreL(request.get("nombreL").toString());
             }
-            if (request.containsKey("LocalidadL")) {
-                lugar.setLocalidadL(request.get("LocalidadL").toString());
+            if (request.containsKey("localidadL")) {
+                lugar.setLocalidadL(request.get("localidadL").toString());
             }
-            if (request.containsKey("BarrioL")) {
-                lugar.setBarrioL(request.get("BarrioL").toString());
+            if (request.containsKey("barrioL")) {
+                lugar.setBarrioL(request.get("barrioL").toString());
             }
-            if (request.containsKey("DireccionL")) {
-                lugar.setDireccionL(request.get("DireccionL").toString());
+            if (request.containsKey("direccionL")) {
+                lugar.setDireccionL(request.get("direccionL").toString());
             }
-            if (request.containsKey("TipoL")) {
-                lugar.setTipoL(request.get("TipoL").toString());
+            if (request.containsKey("tipoL")) {
+                lugar.setTipoL(request.get("tipoL").toString());
             }
-            if (request.containsKey("DescripcionL")) {
-                lugar.setDescripcionL(request.get("DescripcionL").toString());
+            if (request.containsKey("descripcionL")) {
+                lugar.setDescripcionL(request.get("descripcionL").toString());
             }
-            if (request.containsKey("Fecha_PublicacionL")) {
-                DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                lugar.setFechanPL(LocalDate.parse(request.get("Fecha_PublicacionL").toString(), formatterFechaL));
+            if (request.containsKey("fecha_PublicacionL")) {
+                lugar.setFecha_PublicacionL(LocalDate.parse(request.get("fecha_PublicacionL").toString()));
             }
 
             this.lugarImp.update(lugar);

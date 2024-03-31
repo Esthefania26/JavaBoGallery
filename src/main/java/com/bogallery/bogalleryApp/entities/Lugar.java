@@ -22,25 +22,25 @@ public class Lugar {
     private Long id;
 
     @Column( name = "NombreL", length = 50, nullable = false)
-    private String nombreL;
+    private String NombreL;
 
     @Column( name = "LocalidadL", length = 40, nullable = false)
-    private String localidadL;
+    private String LocalidadL;
 
     @Column( name = "BarrioL", length = 40, nullable = false)
-    private String barrioL;
+    private String BarrioL;
 
     @Column( name = "DireccionL", length = 60, nullable = false)
-    private String direccionL;
+    private String DireccionL;
 
     @Column( name = "TipoL", length = 40, nullable = false)
-    private String tipoL;
+    private String TipoL;
 
     @Column(name = "DescripcionL", columnDefinition = "TEXT", nullable = false)
-    private String descripcionL;
+    private String DescripcionL;
 
     @Column( name = "Fecha_PublicacionL",  nullable = false)
-    private LocalDate fechanPL;
+    private LocalDate Fecha_PublicacionL;
 
 
     //muchos lugares van a ser registrados por un usuario
