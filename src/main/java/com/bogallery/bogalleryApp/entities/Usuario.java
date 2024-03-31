@@ -23,29 +23,29 @@ public class Usuario {
 
 
     @Column (name = "Nombre_usu", length = 30, nullable = false)
-    private String nombre;
+    private String Nombre_usu;
     @Column (name = "Apellido_uso", length = 30, nullable = false)
-    private String apellido;
+    private String Apellido_uso;
     @Column (name = "Edad", length = 2, nullable = false)
-    private int edad;
+    private int Edad;
     @Column (name = "Direccion_usu", length = 80, nullable = false)
-    private String direccion;
+    private String Direccion_usu;
     @Column (name = "Fecha_usu", nullable = false)
-    private LocalDate fecha_usu;
+    private LocalDate Fecha_usu;
 
     @Column (name = "Telefono_usu", length = 12, nullable = false)
-    private int telefono;
+    private int Telefono_usu;
     @Column (name = "Correo_usu", length = 80, nullable = false)
-    private String coreo;
+    private String Correo_usu;
     @Column (name = "Password_usu", length = 50, nullable = false)
-    private String passwaord;
+    private String Password_usu;
     @Column (name = "Primer_idioma", length = 50, nullable = false)
-    private String primerI;
+    private String Primer_idioma;
     @Column (name = "Segundo_idioma", length = 50, nullable = false)
-    private String segundoI;
+    private String Segundo_idioma;
 
     @Column(name = "Genero_usu", length = 100, nullable = false)
-    private String genero;
+    private String Genero_usu;
 
     //un usuario puede generar muchas inscripciones
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)

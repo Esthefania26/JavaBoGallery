@@ -32,19 +32,17 @@ public class UsuarioController {
             System.out.println("@@@" + request);
             Usuario usuario = new Usuario();
             //usuario.setId(Long.parseLong(request.get("Id_usu").toString()));
-            usuario.setNombre(request.get("Nombre_usu").toString());
-            usuario.setApellido(request.get("Apellido_uso").toString()); // Aquí estaba el error de tipografía en "Apellido_uso"
-            usuario.setEdad(request.get("Edad").hashCode());
-            usuario.setDireccion(request.get("Direccion_usu").toString());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate fechaUsu = LocalDate.parse(request.get("Fecha_usu").toString(), formatter);
-            usuario.setFecha_usu(fechaUsu);
-            usuario.setTelefono(request.get("Telefono_usu").hashCode());
-            usuario.setCoreo(request.get("Correo_usu").toString());
-            usuario.setPasswaord(request.get("Password_usu").toString());
-            usuario.setPrimerI(request.get("Primer_idioma").toString());
-            usuario.setSegundoI(request.get("Segundo_idioma").toString());
-            usuario.setGenero(request.get("Genero_usu").toString());
+            usuario.setNombre_usu(request.get("nombre_usu").toString());
+            usuario.setApellido_uso(request.get("apellido_uso").toString()); // Aquí estaba el error de tipografía en "Apellido_uso"
+            usuario.setEdad(Integer.parseInt(request.get("edad").toString()));
+            usuario.setDireccion_usu(request.get("direccion_usu").toString());
+            usuario.setFecha_usu(LocalDate.parse(request.get("fecha_usu").toString()));
+            usuario.setTelefono_usu(Integer.parseInt(request.get("telefono_usu").toString()));
+            usuario.setCorreo_usu(request.get("correo_usu").toString());
+            usuario.setPassword_usu(request.get("password_usu").toString());
+            usuario.setPrimer_idioma(request.get("primer_idioma").toString());
+            usuario.setSegundo_idioma(request.get("segundo_idioma").toString());
+            usuario.setGenero_usu(request.get("genero_usu").toString());
 
             this.usuarioImp.create(usuario);
 
@@ -131,41 +129,41 @@ public class UsuarioController {
             }
 
             // Actualizar los campos del usuario con los datos recibidos en el cuerpo de la solicitud
-            if (request.containsKey("Nombre_usu")) {
-                usuario.setNombre(request.get("Nombre_usu").toString());
+            if (request.containsKey("nombre_usu")) {
+                usuario.setNombre_usu(request.get("nombre_usu").toString());
             }
-            if (request.containsKey("Apellido_uso")) {
-                usuario.setApellido(request.get("Apellido_uso").toString());
+            if (request.containsKey("apellido_uso")) {
+                usuario.setApellido_uso(request.get("apellido_uso").toString());
             }
-            if (request.containsKey("Edad")) {
-                usuario.setEdad(request.get("Edad").hashCode());
+            if (request.containsKey("edad")) {
+                usuario.setEdad(Integer.parseInt(request.get("edad").toString()));
             }
-            if (request.containsKey("Direccion_usu")) {
-                usuario.setDireccion(request.get("Direccion_usu").toString());
+            if (request.containsKey("direccion_usu")) {
+                usuario.setDireccion_usu(request.get("direccion_usu").toString());
             }
-            if (request.containsKey("Fecha_usu")) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate fechaUsu = LocalDate.parse(request.get("Fecha_usu").toString(), formatter);
-                usuario.setFecha_usu(fechaUsu);
-            }
-            if (request.containsKey("Telefono_usu")) {
-                usuario.setTelefono(request.get("Telefono_usu").hashCode());
+            if (request.containsKey("fecha_usu"))
+            {
+                usuario.setFecha_usu(LocalDate.parse(request.get("fecha_usu").toString()));
 
             }
-            if (request.containsKey("Correo_usu")) {
-                usuario.setCoreo(request.get("Correo_usu").toString());
+            if (request.containsKey("telefono_usu")) {
+                usuario.setTelefono_usu(Integer.parseInt(request.get("telefono_usu").toString()));
+
             }
-            if (request.containsKey("Password_usu")) {
-                usuario.setPasswaord(request.get("Password_usu").toString());
+            if (request.containsKey("correo_usu")) {
+                usuario.setCorreo_usu(request.get("correo_usu").toString());
             }
-            if (request.containsKey("Primer_idioma")) {
-                usuario.setPrimerI(request.get("Primer_idioma").toString());
+            if (request.containsKey("password_usu")) {
+                usuario.setPassword_usu(request.get("password_usu").toString());
             }
-            if (request.containsKey("Segundo_idioma")) {
-                usuario.setSegundoI(request.get("Segundo_idioma").toString());
+            if (request.containsKey("primer_idioma")) {
+                usuario.setPrimer_idioma(request.get("primer_idioma").toString());
             }
-            if (request.containsKey("Gener_usu")){
-                usuario.setGenero(request.get("Genero_usu").toString());
+            if (request.containsKey("segundo_idioma")) {
+                usuario.setSegundo_idioma(request.get("segundo_idioma").toString());
+            }
+            if (request.containsKey("genero_usu")){
+                usuario.setGenero_usu(request.get("genero_usu").toString());
             }
 
             this.usuarioImp.update(usuario);
