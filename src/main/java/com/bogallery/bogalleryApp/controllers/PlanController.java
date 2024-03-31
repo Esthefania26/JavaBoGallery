@@ -55,7 +55,7 @@ public class PlanController {
             Lugar lugar = lugarImp.findById(Long.parseLong(request.get("Id_lugar").toString()));
             plan.setLugar(lugar);
 
-            Empresa empresa = empresaImp.findById(Long.parseLong(request.get("Nit_empresa").toString()));
+            Empresa empresa = empresaImp.findById(Long.parseLong(request.get("Id_empresa").toString()));
             plan.setEmpresa(empresa);
 
             Categoria categoria = categoriaImp.findById(Long.parseLong(request.get("Id_categorias").toString()));

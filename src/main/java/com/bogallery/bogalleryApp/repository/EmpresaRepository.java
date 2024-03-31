@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmpresaRepository extends JpaRepository<Empresa,Long> {
 
-    @Query(value = "select p From Empresa p where p.id=id")
+
     public Empresa findById(int id);
 }

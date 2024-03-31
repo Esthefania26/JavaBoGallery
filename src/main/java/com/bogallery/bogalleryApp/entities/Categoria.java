@@ -18,7 +18,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "Id_categorias", length =  11, nullable = false)
     private Long Id;
-    @Column(name = "DescripcionP", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "DescripcionC", columnDefinition = "TEXT", nullable = false)
     private String descripcionC;
 
 //una categoria puede tener muchos planes

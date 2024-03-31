@@ -34,11 +34,13 @@ public class Rol {
     private char estado;
 
     //Muchos roles pueden estar asociados a un usuario
- @ManyToMany(mappedBy = "rol")
-    private List<Usuario> usuario;
+     @ManyToMany(mappedBy = "rol")
+        private List<Usuario> usuario;
 
 //Un rol puede estar asociado a muchas empresas
     @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
-    private List<Empresa> empresa;
+    private List<Empresa> empresas;
+
+
 
 }

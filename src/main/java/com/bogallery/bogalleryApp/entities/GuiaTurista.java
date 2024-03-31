@@ -31,7 +31,7 @@ public class GuiaTurista {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_empresa", nullable = false)
+    @JoinColumn(name = "Id_empresa", nullable = false)
     private Empresa empresa;
 
 }

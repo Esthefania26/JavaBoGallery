@@ -17,6 +17,9 @@ public class Empresa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id_empresa", length =  11, nullable = false)
+    private Long id;
+
     @Column(name = "Nit_empresa", length = 15, nullable = false)
     private Long nit;
 
@@ -52,9 +55,9 @@ public class Empresa {
 
 
 //Muchas empresas pueden estar asociadas a un ro,
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_rol", nullable = false)
-    private Rol rol;
+@ManyToOne
+@JoinColumn(name = "Id_rol", nullable = false)
+private Rol rol;
 
 
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)

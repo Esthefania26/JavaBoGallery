@@ -1,6 +1,8 @@
 package com.bogallery.bogalleryApp.controllers;
 import com.bogallery.bogalleryApp.entities.Empresa;
+import com.bogallery.bogalleryApp.entities.Rol;
 import com.bogallery.bogalleryApp.service.imp.EmpresaImp;
+import com.bogallery.bogalleryApp.service.imp.RolImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,11 @@ public class EmpresaController {
     @Autowired
     EmpresaImp empresaImp;
 
+    @Autowired
+    private RolImp rolImp;
+
+
+
     @PostMapping("create")
     public ResponseEntity<Map<String,Object>> create(@RequestBody Map<String,Object> request){
         Map<String,Object> response=new HashMap<>();
@@ -28,29 +35,38 @@ public class EmpresaController {
 
 
         try {
+            System.out.println("Contenido del mapa request: " + request);
             System.out.println("@@@@"+request);
             Empresa empresa = new Empresa();
 
-            empresa.setNit(Long.parseLong(request.get("nit").toString()));
-            empresa.setNombreEm(request.get("nombreEm").toString());
-            empresa.setBarrioEm(request.get("barrioEm").toString());
-            empresa.setCorreoEm(request.get("correoEm").toString());
-            empresa.setDireccionEm(request.get("direccionEm").toString());
-            empresa.setEstadoEm(request.get("estadoEm").toString().charAt(0));
-            DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según tus necesidades
-            empresa.setFecha_registroEm(LocalDateTime.parse(request.get("Fecha_registroEM").toString(), formatterFechaL));
-            empresa.setLocalidadEm(request.get("localidadEmp").toString());
-            empresa.setRazon(request.get("razon").toString());
-            empresa.setTelefono_em(request.get("telefono").hashCode());
-            empresa.setRut(request.get("rut").hashCode());
 
 
+            empresa.setNit(Long.parseLong(request.get("Nit_empresa").toString()));
+            empresa.setNombreEm(request.get("Nombre_em").toString());
+            empresa.setBarrioEm(request.get("Barrio_em").toString());
+            empresa.setCorreoEm(request.get("Correo_em").toString());
+            empresa.setDireccionEm(request.get("Direccion_em").toString());
+            empresa.setEstadoEm(request.get("Estado_em").toString().charAt(0));
 
+            String fechaRegistro = request.get("Fecha_registroEm").toString(); // Obtener la fecha como una cadena
+            LocalDateTime fechaRegistroEm = LocalDateTime.parse(fechaRegistro + " 00:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            empresa.setFecha_registroEm(fechaRegistroEm); // Establecer la fecha de registro en el objeto Empresa
+
+            empresa.setLocalidadEm(request.get("Localidad_em").toString());
+            empresa.setRazon(request.get("Razon_social").toString());
+            empresa.setTelefono_em(request.get("Telefono_em").hashCode());
+            empresa.setRut(request.get("Rut").hashCode());
+
+            Rol rol = rolImp.findById(Long.parseLong(request.get("Id_rol").toString()));
+
+            empresa.setRol(rol);
+
+           this.empresaImp.create(empresa);
             response.put("status","success");
             response.put("data","Registro Exitoso");
         }catch (Exception e){
             response.put("status", HttpStatus.BAD_GATEWAY);
-            response.put("data",e.getMessage());
+            response.put("error",e.getMessage());
             return new ResponseEntity<>(response,HttpStatus.BAD_GATEWAY);
         }
 
@@ -125,18 +141,21 @@ public class EmpresaController {
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
 
-            empresa.setNit(Long.parseLong(request.get("nit").toString()));
-            empresa.setNombreEm(request.get("nombreEm").toString());
-            empresa.setBarrioEm(request.get("barrioEm").toString());
-            empresa.setCorreoEm(request.get("correoEm").toString());
-            empresa.setDireccionEm(request.get("direccionEm").toString());
-            empresa.setEstadoEm(request.get("estadoEm").toString().charAt(0));
-            DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            empresa.setFecha_registroEm(LocalDateTime.parse(request.get("Fecha_registroEM").toString(), formatterFechaL));
-            empresa.setLocalidadEm(request.get("localidadEmp").toString());
-            empresa.setRazon(request.get("razon").toString());
-            empresa.setTelefono_em(request.get("telefono").hashCode());
-            empresa.setRut(request.get("rut").hashCode());
+            empresa.setNit(Long.parseLong(request.get("Nit_empresa").toString()));
+            empresa.setNombreEm(request.get("Nombre_em").toString());
+            empresa.setBarrioEm(request.get("Barrio_em").toString());
+            empresa.setCorreoEm(request.get("Correo_em").toString());
+            empresa.setDireccionEm(request.get("Direccion_em").toString());
+            empresa.setEstadoEm(request.get("Estado_em").toString().charAt(0));
+
+            String fechaRegistro = request.get("Fecha_registroEm").toString(); // Obtener la fecha como una cadena
+            LocalDateTime fechaRegistroEm = LocalDateTime.parse(fechaRegistro + " 00:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            empresa.setFecha_registroEm(fechaRegistroEm); // Establecer la fecha de registro en el objeto Empresa
+
+            empresa.setLocalidadEm(request.get("Localidad_em").toString());
+            empresa.setRazon(request.get("Razon_social").toString());
+            empresa.setTelefono_em(request.get("Telefono_em").hashCode());
+            empresa.setRut(request.get("Rut").hashCode());
 
             empresaImp.update(empresa);
 

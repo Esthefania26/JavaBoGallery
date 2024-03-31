@@ -1,6 +1,9 @@
 package com.bogallery.bogalleryApp.controllers;
 
+import com.bogallery.bogalleryApp.entities.Empresa;
+import com.bogallery.bogalleryApp.entities.Plan;
 import com.bogallery.bogalleryApp.entities.Rol;
+import com.bogallery.bogalleryApp.service.imp.EmpresaImp;
 import com.bogallery.bogalleryApp.service.imp.RolImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +25,7 @@ public class RolController {
     @Autowired
     RolImp rolImp;
 
+
     @PostMapping("create")
     public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request) {
         Map<String, Object> response = new HashMap<>();
@@ -34,6 +38,7 @@ public class RolController {
             rol.setFecha_registroR(LocalDate.parse(request.get("Fecha_registroR").toString(), formatterFechaR));
 
             rol.setEstado(request.get("Estado").toString().charAt(0));
+
 
 
             this.rolImp.create(rol);

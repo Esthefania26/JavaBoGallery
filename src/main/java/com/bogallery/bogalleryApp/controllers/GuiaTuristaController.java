@@ -43,12 +43,12 @@ public class GuiaTuristaController {
 
             System.out.println("@@@@"+request);
             GuiaTurista guiaTurista = new GuiaTurista();
-            guiaTurista.setDescripcionGt(request.get("descripcionGt").toString());
+
             guiaTurista.setDescripcionGt(request.get("DescripcionGt").toString());
 //Foraneas
             PerfilGuia perfilGuia = perfilGuiImp.findById(Long.parseLong(request.get("Id_perfilGuia").toString()));
             guiaTurista.setPerfilGuia(perfilGuia);
-            Empresa empresa = empresaImp.findById(Long.parseLong(request.get("Nit_empresa").toString()));
+            Empresa empresa = empresaImp.findById(Long.parseLong(request.get("Id_empresa").toString()));
             guiaTurista.setEmpresa(empresa);
             Plan plan = planImp.findById(Long.parseLong(request.get("Id_planes").toString()));
             guiaTurista.setPlan(plan);
