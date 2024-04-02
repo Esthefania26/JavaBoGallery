@@ -34,6 +34,8 @@ public class RolController {
             Rol rol = new Rol();
             rol.setNombreR(request.get("Nombre_rol").toString());
             rol.setDescripcion_rol(request.get("Descripcion_rol").toString());
+
+
             DateTimeFormatter formatterFechaR = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             rol.setFecha_registroR(LocalDate.parse(request.get("Fecha_registroR").toString(), formatterFechaR));
 

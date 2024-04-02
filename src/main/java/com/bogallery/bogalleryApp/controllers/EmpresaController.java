@@ -58,7 +58,6 @@ public class EmpresaController {
             empresa.setRut(request.get("Rut").hashCode());
 
             Rol rol = rolImp.findById(Long.parseLong(request.get("Id_rol").toString()));
-
             empresa.setRol(rol);
 
            this.empresaImp.create(empresa);

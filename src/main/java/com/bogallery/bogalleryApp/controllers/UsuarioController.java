@@ -36,9 +36,7 @@ public class UsuarioController {
             usuario.setApellido(request.get("Apellido_uso").toString()); // Aquí estaba el error de tipografía en "Apellido_uso"
             usuario.setEdad(request.get("Edad").hashCode());
             usuario.setDireccion(request.get("Direccion_usu").toString());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate fechaUsu = LocalDate.parse(request.get("Fecha_usu").toString(), formatter);
-            usuario.setFecha_usu(fechaUsu);
+           usuario.setFecha_usu(LocalDate.parse(request.get("fecha_usu").toString()));
             usuario.setTelefono(request.get("Telefono_usu").hashCode());
             usuario.setCoreo(request.get("Correo_usu").toString());
             usuario.setPasswaord(request.get("Password_usu").toString());

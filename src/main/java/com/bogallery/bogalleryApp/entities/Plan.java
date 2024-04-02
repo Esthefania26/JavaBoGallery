@@ -58,7 +58,7 @@ public class Plan {
     private List<GuiaTurista> guiaTurista;
 //muchos planes pueden esta registrados por una empresa
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "nit_empresa", nullable = false)
+    @JoinColumn(name = "Id_empresa", nullable = false)
     private Empresa empresa;
 
     @ManyToOne(fetch = FetchType.LAZY)
