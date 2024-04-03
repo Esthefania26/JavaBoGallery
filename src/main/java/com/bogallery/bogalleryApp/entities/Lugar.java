@@ -1,5 +1,6 @@
 package com.bogallery.bogalleryApp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,7 +45,8 @@ public class Lugar {
 
 
     //muchos lugares van a ser registrados por un usuario
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="Id_usu", nullable = false)
     private Usuario usuario;
 

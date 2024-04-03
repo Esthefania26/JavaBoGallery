@@ -22,9 +22,10 @@ public class UsuarioController {
     @Autowired
     UsuarioImp usuarioImp;
 
-    public UsuarioController(UsuarioImp usuarioImp) {
+   /* public UsuarioController(UsuarioImp usuarioImp) {
         this.usuarioImp = usuarioImp;
-    }
+    }*/
+
     @PostMapping("create")
     public ResponseEntity<Map<String, Object>> create(@RequestBody Map<String, Object> request) {
         Map<String, Object> response = new HashMap<>();

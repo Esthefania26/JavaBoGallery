@@ -34,14 +34,13 @@ public class ActividadController {
         try {
             System.out.println("@@@" + request);
             Actividad actividad = new Actividad();
-            actividad.setNombreACT(request.get("NombreACT").toString());
-            actividad.setDescripcionACT(request.get("DescripcionACT").toString());
-            DateTimeFormatter formatterFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            actividad.setFechaInicioACT(LocalDateTime.parse(request.get("Fecha_inicioACT").toString(), formatterFecha));
-            actividad.setFechaFinACT(LocalDateTime.parse(request.get("Fecha_finACT").toString(), formatterFecha));
-            actividad.setJornada(request.get("Jordana").toString());
-            actividad.setValor(Integer.parseInt(request.get("Valor").toString()));
-            actividad.setUrlACT(request.get("URL_ACT").toString());
+            actividad.setNombreACT(request.get("nombreACT").toString());
+            actividad.setDescripcionACT(request.get("descripcionACT").toString());
+            actividad.setFecha_inicioACT(LocalDateTime.parse(request.get("fecha_inicioACT").toString()));
+            actividad.setFecha_finACT(LocalDateTime.parse(request.get("fecha_finACT").toString()));
+            actividad.setJornada(request.get("jordana").toString());
+            actividad.setValor(Integer.parseInt(request.get("valor").toString()));
+            actividad.setURL_ACT(request.get("url_act").toString());
             Lugar lugar = lugarImp.findById(Long.parseLong(request.get("Id_lugar").toString()));
             actividad.setLugar(lugar);
             this.actividadImp.create(actividad);
@@ -125,25 +124,25 @@ public class ActividadController {
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
 
-           if (request.containsKey("NombreACT")) {
-                actividad.setNombreACT(request.get("NombreACT").toString());
+           if (request.containsKey("nombreACT")) {
+                actividad.setNombreACT(request.get("nombreACT").toString());
             }
-            if (request.containsKey("DescripcionACT")) {
-                actividad.setDescripcionACT(request.get("DescripcionACT").toString());
+            if (request.containsKey("descripcionACT")) {
+                actividad.setDescripcionACT(request.get("descripcionACT").toString());
             }
-            if (request.containsKey("Fecha_inicioACT")) {
-                DateTimeFormatter formatterFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                actividad.setFechaInicioACT(LocalDateTime.parse(request.get("Fecha_inicioACT").toString(), formatterFecha));
+            if (request.containsKey("fecha_inicioACT")) {
+
+                actividad.setFecha_inicioACT(LocalDateTime.parse(request.get("fecha_inicioACT").toString()));
             }
-            if (request.containsKey("Fecha_finACT")) {
-                DateTimeFormatter formatterFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                actividad.setFechaFinACT(LocalDateTime.parse(request.get("Fecha_finACT").toString(), formatterFecha));
+            if (request.containsKey("fecha_finACT")) {
+
+                actividad.setFecha_finACT(LocalDateTime.parse(request.get("fecha_finACT").toString()));
             }
-            if (request.containsKey("Valor")) {
-                actividad.setValor(Integer.parseInt(request.get("Valor").toString()));
+            if (request.containsKey("valor")) {
+                actividad.setValor(Integer.parseInt(request.get("valor").toString()));
             }
-            if (request.containsKey("URL_ACT")) {
-                actividad.setUrlACT(request.get("URL_ACT").toString());
+            if (request.containsKey("url_act")) {
+                actividad.setURL_ACT(request.get("url_act").toString());
             }
 
             this.actividadImp.update(actividad);

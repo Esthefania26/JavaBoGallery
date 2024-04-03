@@ -1,5 +1,6 @@
 package com.bogallery.bogalleryApp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -48,11 +49,13 @@ public class Usuario {
     private String Genero_usu;
 
     //un usuario puede generar muchas inscripciones
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Inscripcion> inscripciones;
 
 //Un usuario puede tener muchos roles
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "usuariorol",
@@ -65,7 +68,8 @@ public class Usuario {
 
 
     //un usuario puede registrar muchos lugares
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade =  CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany( mappedBy = "usuario", cascade =  CascadeType.ALL)
     private List<Lugar> lugar;
 }
 

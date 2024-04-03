@@ -17,29 +17,29 @@ public class Actividad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column( name = "Id_actividades", length = 11, nullable = false)
-    private Long id;
+    private Long Id;
 
     @Column( name = "NombreACT", length = 30, nullable = false)
-    private String nombreACT;
+    private String NombreACT;
 
     @Column(name = "DescripcionACT", columnDefinition = "TEXT", nullable = false)
-    private String descripcionACT;
+    private String DescripcionACT;
 
     @Column(name = "Fecha_inicioACT", columnDefinition = "DATETIME",nullable = false)
-    private LocalDateTime fechaInicioACT;
+    private LocalDateTime Fecha_inicioACT;
 
     @Column(name = "Fecha_finACT", columnDefinition = "DATETIME",nullable = false)
-    private LocalDateTime fechaFinACT;
+    private LocalDateTime Fecha_finACT;
 
     @Column(name = "Jornada", length = 100, nullable = false)
-    private String jornada;
+    private String Jornada;
 
 
     @Column( name = "Valor", length = 10, nullable = false)
-    private int valor;
+    private int Valor;
 
     @Column( name = "URL_ACT",  nullable = false)
-    private String urlACT;
+    private String URL_ACT;
 
     //muchas actividades pueden estar en un lugar
     @ManyToOne(fetch = FetchType.LAZY)
