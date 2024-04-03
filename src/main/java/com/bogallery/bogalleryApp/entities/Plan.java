@@ -36,9 +36,9 @@ public class Plan {
     private String jornadaP;
 
     @Column(name = "FechaP", columnDefinition = "DATETIME", nullable = false)
-    private LocalDateTime fechaP;
+    private LocalDate fechaP;
     @Column(name = "Fecha_finalP", columnDefinition = "DATETIME", nullable = false)
-    private LocalDateTime fechafinalP;
+    private LocalDate fechafinalP;
 
 //Un plan puede generar muchas incripciones
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)

@@ -141,10 +141,10 @@ public class UsuarioController {
             if (request.containsKey("Direccion_usu")) {
                 usuario.setDireccion(request.get("Direccion_usu").toString());
             }
-            if (request.containsKey("Fecha_usu")) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate fechaUsu = LocalDate.parse(request.get("Fecha_usu").toString(), formatter);
-                usuario.setFecha_usu(fechaUsu);
+            if (request.containsKey("fecha_usu"))
+            {
+                usuario.setFecha_usu(LocalDate.parse(request.get("fecha_usu").toString()));
+
             }
             if (request.containsKey("Telefono_usu")) {
                 usuario.setTelefono(request.get("Telefono_usu").hashCode());

@@ -48,9 +48,13 @@ public class PlanController {
             plan.setTotalcuposP(request.get("totalcuposP").hashCode());
             plan.setPrecioP(request.get("precioP").hashCode());
             plan.setJornadaP(request.get("jornadaP").toString());
-            DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según tus necesidades
-            plan.setFechaP(LocalDateTime.parse(request.get("FechaP").toString(), formatterFechaL));
-            plan.setFechafinalP(LocalDateTime.parse(request.get("FechafinalP").toString(), formatterFechaL));
+
+            DateTimeFormatter formatterFechaP = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            plan.setFechaP(LocalDate.parse(request.get("FechaP").toString(), formatterFechaP));
+
+            DateTimeFormatter formatterFechafinalP = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            plan.setFechafinalP(LocalDate.parse(request.get("FechafinalP").toString(), formatterFechafinalP));
+
 
             Lugar lugar = lugarImp.findById(Long.parseLong(request.get("Id_lugar").toString()));
             plan.setLugar(lugar);
@@ -153,12 +157,12 @@ public class PlanController {
                 plan.setJornadaP(request.get("jornadaP").toString());
             }
             if (request.containsKey("FechaP")) {
-                DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                plan.setFechaP(LocalDateTime.parse(request.get("FechaP").toString(), formatterFechaL));
+                DateTimeFormatter formatterFechaP = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                plan.setFechaP(LocalDate.parse(request.get("FechaP").toString(), formatterFechaP));
             }
             if (request.containsKey("FechafinalP")) {
-                DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                plan.setFechafinalP(LocalDateTime.parse(request.get("FechafinalP").toString(), formatterFechaL));
+                DateTimeFormatter formatterFechafinalP = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                plan.setFechafinalP(LocalDate.parse(request.get("FechafinalP").toString(), formatterFechafinalP));
             }
             this.planImp.update(plan);
             response.put("status", "success");
