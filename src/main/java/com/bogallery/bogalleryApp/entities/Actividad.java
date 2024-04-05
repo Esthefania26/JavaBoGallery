@@ -24,13 +24,13 @@ public class Actividad {
     @Column( name = "NombreACT", length = 30, nullable = false)
     private String NombreACT;
 
-    @Column(name = "DescripcionACT", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "DescripcionACT",  nullable = false)
     private String DescripcionACT;
 
-    @Column(name = "Fecha_inicioACT", columnDefinition = "DATETIME",nullable = false)
+    @Column(name = "Fecha_inicioACT", nullable = false)
     private LocalDate Fecha_inicioACT;
 
-    @Column(name = "Fecha_finACT", columnDefinition = "DATETIME",nullable = false)
+    @Column(name = "Fecha_finACT", nullable = false)
     private LocalDate Fecha_finACT;
 
     @Column(name = "Jornada", length = 100, nullable = false)

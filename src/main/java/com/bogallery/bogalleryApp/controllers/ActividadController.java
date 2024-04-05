@@ -39,7 +39,7 @@ public class ActividadController {
             actividad.setDescripcionACT(request.get("descripcionACT").toString());
             actividad.setFecha_inicioACT(LocalDate.parse(request.get("fecha_inicioACT").toString()));
             actividad.setFecha_finACT(LocalDate.parse(request.get("fecha_finACT").toString()));
-            actividad.setJornada(request.get("jordana").toString());
+            actividad.setJornada(request.get("jornada").toString());
             actividad.setValor(Integer.parseInt(request.get("valor").toString()));
             actividad.setURL_ACT(request.get("url_act").toString());
             Lugar lugar = lugarImp.findById(Long.parseLong(request.get("Id_lugar").toString()));
