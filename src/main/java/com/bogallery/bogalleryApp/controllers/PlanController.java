@@ -32,8 +32,8 @@ public class PlanController {
             plan.setTotalcuposP(request.get("totalcuposP").hashCode());
             plan.setPrecioP(request.get("precioP").hashCode());
             plan.setJornadaP(request.get("jornadaP").toString());
-            plan.setFechaP(LocalDate.parse(request.get("FechaP").toString()));
-            plan.setFechafinalP(LocalDate.parse(request.get("FechafinalP").toString()));
+            plan.setFechaP(LocalDate.parse(request.get("fechaP").toString()));
+            plan.setFecha_finalP(LocalDate.parse(request.get("fechafinalP").toString()));
 
             this.planImp.create(plan);
             response.put("status","succes");
@@ -91,11 +91,11 @@ public class PlanController {
             if (request.containsKey("jornadaP")) {
                 plan.setJornadaP(request.get("jornadaP").toString());
             }
-            if (request.containsKey("FechaP")) {
-               plan.setFechaP(LocalDate.parse(request.get("FechaP").toString()));
+            if (request.containsKey("fechaP")) {
+               plan.setFechaP(LocalDate.parse(request.get("fechaP").toString()));
             }
-            if (request.containsKey("FechafinalP")) {
-                plan.setFechafinalP(LocalDate.parse(request.get("FechafinalP").toString()));
+            if (request.containsKey("fechafinalP")) {
+                plan.setFecha_finalP(LocalDate.parse(request.get("fechafinalP").toString()));
             }
             this.planImp.update(plan);
             response.put("status", "success");

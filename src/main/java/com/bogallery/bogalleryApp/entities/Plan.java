@@ -1,4 +1,5 @@
 package com.bogallery.bogalleryApp.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,11 +24,11 @@ public class Plan {
     @Column (name = "NombreP", length = 40, nullable = false)
     private String NombreP;
     @Column(name = "DescripcionP", columnDefinition = "TEXT", nullable = false)
-    private String descripcionP;
+    private String DescripcionP;
     @Column (name = "TotalcuposP", length = 3, nullable = false)
     private int TotalcuposP;
     @Column (name = "PrecioP", length = 10, nullable = false)
-    private int precioP;
+    private int PrecioP;
 
     @Column(name = "Propietario_plan",length = 40, nullable = false)
     private String propietario_plan;
@@ -38,7 +39,7 @@ public class Plan {
     @Column(name = "FechaP", columnDefinition = "DATE", nullable = false)
     private LocalDate FechaP;
     @Column(name = "Fecha_finalP", columnDefinition = "DATE", nullable = false)
-    private LocalDate FechafinalP;
+    private LocalDate Fecha_finalP;
 
 //Un plan puede generar muchas incripciones
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
@@ -46,22 +47,27 @@ public class Plan {
 
 
  //Muchos planes pueden pertenecer a una categoria
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "Id_categorias", nullable = false)
+    @JoinColumn(name = "Id_categorias", nullable = true)
     private Categoria categoria;
 
 //Un plan puede tener muchas promociones
+
+    @JsonIgnore
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
     private List<Promocion> promocion;
 //Un plan puede tener muchos guias turistas
+
+    @JsonIgnore
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
     private List<GuiaTurista> guiaTurista;
 //muchos planes pueden esta registrados por una empresa
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "nit_empresa", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "nit_empresa", nullable = true)
     private Empresa empresa;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_lugar", nullable = false)
     private Lugar lugar;
 }
