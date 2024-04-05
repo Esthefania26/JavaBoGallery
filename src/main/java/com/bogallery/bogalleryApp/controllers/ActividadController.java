@@ -79,7 +79,7 @@ public class ActividadController {
 
             if (actividad == null) {
                 response.put("status", HttpStatus.NOT_FOUND);
-                response.put("error", "Actividad no encontrada");
+                response.put("error", "Actividad no encontrada ");
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
 
