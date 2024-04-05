@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -36,8 +37,8 @@ public class ActividadController {
             Actividad actividad = new Actividad();
             actividad.setNombreACT(request.get("nombreACT").toString());
             actividad.setDescripcionACT(request.get("descripcionACT").toString());
-            actividad.setFecha_inicioACT(LocalDateTime.parse(request.get("fecha_inicioACT").toString()));
-            actividad.setFecha_finACT(LocalDateTime.parse(request.get("fecha_finACT").toString()));
+            actividad.setFecha_inicioACT(LocalDate.parse(request.get("fecha_inicioACT").toString()));
+            actividad.setFecha_finACT(LocalDate.parse(request.get("fecha_finACT").toString()));
             actividad.setJornada(request.get("jordana").toString());
             actividad.setValor(Integer.parseInt(request.get("valor").toString()));
             actividad.setURL_ACT(request.get("url_act").toString());
@@ -130,13 +131,16 @@ public class ActividadController {
             if (request.containsKey("descripcionACT")) {
                 actividad.setDescripcionACT(request.get("descripcionACT").toString());
             }
+            if (request.containsKey("jornada")) {
+                actividad.setJornada(request.get("jornada").toString());
+            }
             if (request.containsKey("fecha_inicioACT")) {
 
-                actividad.setFecha_inicioACT(LocalDateTime.parse(request.get("fecha_inicioACT").toString()));
+                actividad.setFecha_inicioACT(LocalDate.parse(request.get("fecha_inicioACT").toString()));
             }
             if (request.containsKey("fecha_finACT")) {
 
-                actividad.setFecha_finACT(LocalDateTime.parse(request.get("fecha_finACT").toString()));
+                actividad.setFecha_finACT(LocalDate.parse(request.get("fecha_finACT").toString()));
             }
             if (request.containsKey("valor")) {
                 actividad.setValor(Integer.parseInt(request.get("valor").toString()));

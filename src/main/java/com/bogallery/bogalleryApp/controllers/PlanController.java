@@ -32,9 +32,8 @@ public class PlanController {
             plan.setTotalcuposP(request.get("totalcuposP").hashCode());
             plan.setPrecioP(request.get("precioP").hashCode());
             plan.setJornadaP(request.get("jornadaP").toString());
-            DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según tus necesidades
-            plan.setFechaP(LocalDateTime.parse(request.get("FechaP").toString(), formatterFechaL));
-            plan.setFechafinalP(LocalDateTime.parse(request.get("FechafinalP").toString(), formatterFechaL));
+            plan.setFechaP(LocalDate.parse(request.get("FechaP").toString()));
+            plan.setFechafinalP(LocalDate.parse(request.get("FechafinalP").toString()));
 
             this.planImp.create(plan);
             response.put("status","succes");
@@ -93,12 +92,10 @@ public class PlanController {
                 plan.setJornadaP(request.get("jornadaP").toString());
             }
             if (request.containsKey("FechaP")) {
-                DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                plan.setFechaP(LocalDateTime.parse(request.get("FechaP").toString(), formatterFechaL));
+               plan.setFechaP(LocalDate.parse(request.get("FechaP").toString()));
             }
             if (request.containsKey("FechafinalP")) {
-                DateTimeFormatter formatterFechaL = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                plan.setFechafinalP(LocalDateTime.parse(request.get("FechafinalP").toString(), formatterFechaL));
+                plan.setFechafinalP(LocalDate.parse(request.get("FechafinalP").toString()));
             }
             this.planImp.update(plan);
             response.put("status", "success");

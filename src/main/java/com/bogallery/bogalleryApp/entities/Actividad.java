@@ -1,10 +1,12 @@
 package com.bogallery.bogalleryApp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,10 +28,10 @@ public class Actividad {
     private String DescripcionACT;
 
     @Column(name = "Fecha_inicioACT", columnDefinition = "DATETIME",nullable = false)
-    private LocalDateTime Fecha_inicioACT;
+    private LocalDate Fecha_inicioACT;
 
     @Column(name = "Fecha_finACT", columnDefinition = "DATETIME",nullable = false)
-    private LocalDateTime Fecha_finACT;
+    private LocalDate Fecha_finACT;
 
     @Column(name = "Jornada", length = 100, nullable = false)
     private String Jornada;
@@ -42,7 +44,8 @@ public class Actividad {
     private String URL_ACT;
 
     //muchas actividades pueden estar en un lugar
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_lugar", nullable = false)
     private Lugar lugar;
 }
